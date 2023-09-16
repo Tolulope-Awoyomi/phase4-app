@@ -2,40 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import NavBar from "./NavBar";
-
-import Login from "../pages/Login";
+import { UserProvider } from "./context/user";
 import SignUpForm from "./SignupForm";
+import Login from "../pages/Login";
 
 
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    fetch("/me")
-    .then((r) => {
-      if (r.ok) {
-        r.json()
-        .then((user) => setUser(user));
-      }
-    });
-  }, [])
-
-  if (!user) return <Login onLogin={setUser} />;
 
   return (
     <div className="App">
+      <UserProvider> 
+        <NavBar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/signup" element={<SignUpForm />} />
+          <Route exact path="/login" element={<Login />} />
+        </Routes>
+      </UserProvider>
 
-      <main>
-        <Switch>
-          <Route path="/new">
-            <NewRecipe user={user} />
-          </Route>
-          <Route path="/">
-            <RecipeList />
-          </Route>
-        </Switch>
-      </main>
-        
     </div>
   );
 }

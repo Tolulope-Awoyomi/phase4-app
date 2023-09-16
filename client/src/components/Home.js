@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { UserContext } from './context/user';
+import React, { useContext } from "react";
+import { UserContext } from "./context/user";
 
 function Home() {
     const { user } = useContext(UserContext)
@@ -9,7 +9,7 @@ function Home() {
     } else {
         return (
             <div>
-                <h3>{user.username}</h3>
+                <h3>{user.username} Home</h3>
             </div>
         )
     }
