@@ -1,30 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { UserContext } from "./context/user";
+import { NavLink, useNavigate } from "react-router-dom";
 
-function NavBar({ user, setUser }) {
-  function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
-      if (r.ok) {
-        setUser(null);
-      }
-    });
+function NavBar() {
+    const {user, logout, loggedIn} = useContext(UserContext);
+    const navigate = useNavigate()
+
+  function logoutUser() {
+    fetch('/logout', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(() => {
+        logout()
+        navigate('/')
+    })
   }
 
-  return (
-    <>
-      <div>
-        <Link to="/">Reciplease</Link>
-      </div>
-      <>
-        <button as={Link} to="/new">
-          New Recipe
-        </button>
-        <button variant="outline" onClick={handleLogoutClick}>
-          Logout
-        </button>
-      </>
-    </>
-  );
+  if (loggedIn) {
+    return (
+        <div>
+            <h1>Hello {user.username}</h1>
+            <button onClick={logoutUser}>Logout</button>
+            <hr/>
+        </div>
+    )
+  } else {
+    return (
+          <div>
+            <NavLink to="/login">
+                <button>Login</button>
+            </NavLink>
+            <NavLink to="/signup">
+                <button>Signup</button>
+            </NavLink>
+            <hr/>
+          </div>
+      );
+  }
 }
 
 
