@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { UserContext } from "./context/user";
 
 function SignUpForm({ onLogin }) {
   const [username, setUsername] = useState("");

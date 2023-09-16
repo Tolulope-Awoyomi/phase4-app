@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import NavBar from "./NavBar";
@@ -8,7 +8,7 @@ import Login from "../pages/Login";
 
 
 function App() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
 
   return (
