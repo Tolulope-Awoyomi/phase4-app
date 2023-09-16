@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home";
 import NavBar from "./NavBar";
+
 import Login from "../pages/Login";
+import SignUpForm from "./SignupForm";
 
 
 function App() {
@@ -21,7 +24,17 @@ function App() {
 
   return (
     <div className="App">
-      
+
+      <main>
+        <Switch>
+          <Route path="/new">
+            <NewRecipe user={user} />
+          </Route>
+          <Route path="/">
+            <RecipeList />
+          </Route>
+        </Switch>
+      </main>
         
     </div>
   );

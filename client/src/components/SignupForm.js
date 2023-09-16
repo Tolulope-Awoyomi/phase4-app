@@ -37,62 +37,56 @@ function SignUpForm({ onLogin }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormField>
-        <Label htmlFor="username">Username</Label>
-        <Input
+    
+        <label htmlFor="username">Username</label>
+        <input
           type="text"
           id="username"
           autoComplete="off"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </FormField>
-      <FormField>
-        <Label htmlFor="password">Password</Label>
-        <Input
+     
+        <label htmlFor="password">Password</label>
+        <input
           type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
         />
-      </FormField>
-      <FormField>
-        <Label htmlFor="password">Password Confirmation</Label>
-        <Input
+      
+        <label htmlFor="password">Password Confirmation</label>
+        <input
           type="password"
           id="password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
           autoComplete="current-password"
         />
-      </FormField>
-      <FormField>
-        <Label htmlFor="imageUrl">Profile Image</Label>
-        <Input
+      
+        <label htmlFor="imageUrl">Profile Image</label>
+        <input
           type="text"
           id="imageUrl"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
         />
-      </FormField>
-      <FormField>
-        <Label htmlFor="bio">Bio</Label>
-        <Textarea
+      
+        <label htmlFor="bio">Bio</label>
+        <p
           rows="3"
           id="bio"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
-      </FormField>
-      <FormField>
-        <Button type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
-      </FormField>
-      <FormField>
+     
+        <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+     
         {errors.map((err) => (
-          <Error key={err}>{err}</Error>
+          <p key={err}>{err}</p>
         ))}
-      </FormField>
+      
     </form>
   );
 }

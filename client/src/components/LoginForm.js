@@ -27,36 +27,33 @@ function LoginForm({ onLogin }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormField>
-        <Label htmlFor="username">Username</Label>
-        <Input
+      
+        <label htmlFor="username">Username</label>
+        <input
           type="text"
           id="username"
           autoComplete="off"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </FormField>
-      <FormField>
-        <Label htmlFor="password">Password</Label>
-        <Input
+      
+        <label htmlFor="password">Password</label>
+        <input
           type="password"
           id="password"
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </FormField>
-      <FormField>
-        <Button variant="fill" color="primary" type="submit">
+     
+        <button variant="fill" color="primary" type="submit">
           {isLoading ? "Loading..." : "Login"}
-        </Button>
-      </FormField>
-      <FormField>
+        </button>
+      
         {errors.map((err) => (
-          <Error key={err}>{err}</Error>
+          <p key={err}>{err}</p>
         ))}
-      </FormField>
+      
     </form>
   );
 }
