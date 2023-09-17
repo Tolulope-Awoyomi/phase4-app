@@ -52,58 +52,58 @@ function SignUpForm( ) {
   return (
     <div>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Username: </label>
             <input
                 type="text"
                 id="username"
                 autoComplete="off"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-            /> <br />
+            /> <br /> <br />
 
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">Email Address: </label>
             <input
                 type="text"
                 id="email"
                 autoComplete="off"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-            /> <br />
+            /> <br /> <br />
      
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password: </label>
             <input
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
-            /> <br />
+            /> <br /> <br />
       
-            <label htmlFor="password">Password Confirmation</label>
+            <label htmlFor="password">Password Confirmation: </label>
             <input
                 type="password"
                 id="password_confirmation"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 autoComplete="current-password"
-            /> <br />
+            /> <br /> <br />
       
-            <label htmlFor="imageUrl">Profile Image</label>
+            <label htmlFor="imageUrl">Profile Image: </label>
             <input
                 type="text"
                 id="imageUrl"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-            />
+            /> <br /> <br />
 
-            <label htmlFor="bio">Bio</label>
+            <label htmlFor="bio">Bio: </label>
             <input
                 type="text"
                 rows="3"
                 id="bio"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-            /> <br />
+            /> <br /> <br />
             <input type="submit"></input>
         </form>
         <ul>
