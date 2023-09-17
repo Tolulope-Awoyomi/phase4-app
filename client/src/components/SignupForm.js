@@ -42,7 +42,7 @@ function SignUpForm( ) {
             setPasswordConfirmation("")
             setImageUrl("")
             setBio("")
-            const errorLis = user.errors.map(e => <li>{e}</li>)
+            const errorLis = user.errors.map(e => <li key={e}>{e}</li>)
             setErrorsList(errorLis)
         }
     })
