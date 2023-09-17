@@ -5,11 +5,9 @@ import NavBar from "./NavBar";
 import { UserProvider } from "./context/user";
 import SignUpForm from "./SignupForm";
 import Login from "./Login";
-
+import "./App.css"
 
 function App() {
-  // const [user, setUser] = useState(null);
-
 
   return (
     <div className="App">
