@@ -57,15 +57,17 @@ function SignUpForm( ) {
                 type="text"
                 id="username"
                 autoComplete="off"
+                placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             /> <br /> <br />
 
             <label htmlFor="email">Email Address: </label>
             <input
-                type="text"
+                type="email"
                 id="email"
                 autoComplete="off"
+                placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             /> <br /> <br />
@@ -74,36 +76,40 @@ function SignUpForm( ) {
             <input
                 type="password"
                 id="password"
+                autoComplete="new-password"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
+                
             /> <br /> <br />
       
             <label htmlFor="password">Password Confirmation: </label>
             <input
                 type="password"
                 id="password_confirmation"
+                autoComplete="new-password"
+                placeholder="Confirm your password"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
-                autoComplete="current-password"
+                
             /> <br /> <br />
       
             <label htmlFor="imageUrl">Profile Image: </label>
             <input
-                type="text"
+                type="file"
                 id="imageUrl"
+                accept="image/*"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
             /> <br /> <br />
 
-            <label htmlFor="bio">Bio: </label>
-            <input
-                type="text"
-                rows="3"
+            <label htmlFor="bio">About Me: </label>
+            <textarea
                 id="bio"
+                placeholder="Write a little about yourself (optional)"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-            /> <br /> <br />
+            ></textarea> <br /> <br />
             <input type="submit"></input>
         </form>
         <ul>

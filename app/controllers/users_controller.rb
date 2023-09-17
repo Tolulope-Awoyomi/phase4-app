@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         if user 
             render json: user
         else
-            render json: { errors: user.errors.full_messages }, status: :unauthorized
+            render json: { errors: ["Unauthorized"] }, status: :unauthorized
         end
     end
 

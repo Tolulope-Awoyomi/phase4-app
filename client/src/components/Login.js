@@ -20,21 +20,24 @@ function Login() {
       body: JSON.stringify({ 
         username: username, 
         password: password
-       })
+      })
     })
     .then(res => res.json())
     .then(user => {
-      if(!user.errors){
-        login(user)
-        navigate('/')
+      if (!user.errors) {
+        login(user);
+        navigate('/');
       } else {
-        setUsername("")
-        setPassword("")
-        const errorLis = user.errors.map(e => <li>{e}</li>)
-        setErrorsList(errorLis)
+        setUsername("");
+        setPassword("");
+        const errorListItems = user.errors.map((error, index) => (
+          <li key={index}>{error}</li>
+        ));
+        setErrorsList(errorListItems);
       }
-    })
+    });
   }
+  
 
   return (
     <div>

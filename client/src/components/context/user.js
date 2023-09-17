@@ -16,7 +16,7 @@ function UserProvider({ children }) {
         })
     }, [])
 
-    function login() {
+    function login(user) {
         setUser(user)
         setLoggedIn(true) // set loggedIn flag
     }

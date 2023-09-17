@@ -9,7 +9,7 @@ class User < ApplicationRecord
     
     def password_complexity
         if password.present? && !password.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{5,}$/)
-            errors.add :password, "must include at least one letter and one number and be at least 5 characters long"
+            errors.add :password, "must be at least 5 characters long and contain at least one letter and one number."
         end
     end
 
