@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-    def create 
+    def create
         user = User.create(user_params)
 
         if user.valid?
             session[:user_id] = user.id
-
+             
             render json: user, status: :created
         else
             render json: { errors: [ "Invalid password or username" ] }, status: :unprocessable_entity
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         if user 
             render json: user
         else
-            render json: { errors: [ "Not authorized"] }, status: :unauthorized
+            render json: { errors: [ "Not authorized" ] }, status: :unauthorized
         end
     end
 

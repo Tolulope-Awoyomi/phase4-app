@@ -4,7 +4,7 @@ import Home from "./Home";
 import NavBar from "./NavBar";
 import { UserProvider } from "./context/user";
 import SignUpForm from "./SignupForm";
-import Login from "../pages/Login";
+import Login from "./Login";
 
 
 function App() {
@@ -17,8 +17,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/signup" element={<SignUpForm />} />
-          <Route exact path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </UserProvider>
 

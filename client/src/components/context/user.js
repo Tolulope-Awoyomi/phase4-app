@@ -33,6 +33,7 @@ function UserProvider({ children }) {
 
 
   return (
+    // add loggedIN to global state
     <UserContext.Provider value={{user, login, logout, signup, loggedIn}}>
         {children}
     </UserContext.Provider>
