@@ -24,7 +24,7 @@ class IssuesController < ApplicationController
 
   def update
     if @issue 
-      if @issue.update(issue_params_update)
+      if @issue.update(issue_params)
         render json: @issue, status: :accepted
       else
         render json: { errors: @issue.errors.full_messages }, status: :unprocessable_entity
@@ -53,8 +53,5 @@ class IssuesController < ApplicationController
     params.permit(:title, :description, :category)
   end
 
-  def issue_params_update
-    params.permit(:title, :description, :category)
-  end
 
 end

@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 
         if user.valid?
             session[:user_id] = user.id
-             
             render json: user, status: :created
         else
             render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
@@ -25,13 +24,13 @@ class UsersController < ApplicationController
 
     def update
         if @user 
-            if @user.update!(user_params_update)
+            if @user.update(user_params)
                 render json: @user, status: :accepted
             else
-                render json: { errors: ["validation errors"]}, status: :unprocessable_entity
+                render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
             end
         else
-            render json: { errors: ["Scientist not found"]}, status: :not_found
+            render json: { errors: ["User not found"]}, status: :not_found
         end
     end
 
@@ -54,7 +53,4 @@ class UsersController < ApplicationController
         params.permit(:username, :email, :password, :password_confirmation, :image_url, :bio)
     end
 
-    def user_params_update
-        params.permit(:username, :email, :password, :password_confirmation, :image_url, :bio)
-    end
 end
