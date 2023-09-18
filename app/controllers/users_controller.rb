@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     before_action :one_user, only: [:show, :update, :destroy]
-    
+
     def create
         user = User.create(user_params)
 
@@ -32,6 +32,15 @@ class UsersController < ApplicationController
             end
         else
             render json: { errors: ["Scientist not found"]}, status: :not_found
+        end
+    end
+
+    def destroy
+        if @user 
+            @user.destroy
+            head :no_content, status: :deleted
+        else
+            render json: {error: "User not found"}, status: :not_found
         end
     end
 
