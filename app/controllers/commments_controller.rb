@@ -1,4 +1,6 @@
 class CommmentsController < ApplicationController
+    before_action :authenticate_user!
+
 
     def create 
         user = User.find_by(id: params[:id])
