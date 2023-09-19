@@ -35,5 +35,8 @@ class IssuesController < ApplicationController
     params.permit(:title, :description, :category)
   end
 
+  def authorize
+    return render json: { errors: [ "Not authorized" ] }, status: :unauthorized unless session[:user_id]
+end
 
 end

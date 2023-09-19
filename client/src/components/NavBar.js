@@ -36,9 +36,9 @@ function NavBar() {
             <NavLink to="/signup">
                 <button>Signup</button>
             </NavLink>
-            <NavLink to="/issues">
+            {/* <NavLink to="/issues">
                 <button>Issues</button>
-            </NavLink>
+            </NavLink> */}
             <hr/>
           </div>
       );
