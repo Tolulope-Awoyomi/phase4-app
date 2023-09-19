@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   resources :comments, except: [:show, :index]
   resources :users, only: [:create, :show]
-  resources :movies
+  resources :issues
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

@@ -10,3 +10,4 @@ class IssueSerializer < ActiveModel::Serializer
     }
   }
 end
+end
