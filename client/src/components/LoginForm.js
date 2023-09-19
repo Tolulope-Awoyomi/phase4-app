@@ -26,7 +26,7 @@ function LoginForm() {
     .then(user => {
       if (!user.errors) {
         login(user);
-        navigate('/');
+        navigate('/home');
       } else {
         setUsername("");
         setPassword("");
@@ -41,6 +41,7 @@ function LoginForm() {
 
   return (
     <div>
+      <h4>Enter your login details</h4>
       <form onSubmit={handleSubmit}>
       
       <label htmlFor="username">Username: </label>

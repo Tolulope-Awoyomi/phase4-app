@@ -19,34 +19,40 @@ function NavBar() {
     })
   }
 
-  if (loggedIn) {
-    return (
-        <div>
-            <h1>Hello {user.username}</h1>
-            <button onClick={logoutUser}>Logout</button>
-            <hr/>
-        </div>
-    )
-  } else {
+//   if (loggedIn) {
+//     return (
+//         <div>
+//             <h1>Hello {user.username}</h1>
+//             <button onClick={logoutUser}>Logout</button>
+//             <hr/>
+//         </div>
+//     )
+//   } else {
     return (
 
 
-          <div>
-            {/* <NavLink to="/login">
-                <button>Login</button>
+          <div className="header">
+            <nav>
+            <NavLink to="/issues">
+                <button>ALL ISSUES</button>
             </NavLink>
-            <NavLink to="/signup">
-                <button>Signup</button>
-            </NavLink> */}
-            {/* <NavLink to="/issues">
-                <button>Issues</button>
-            </NavLink> */}
-            {/* <button onClick={logoutUser}>Logout</button> */}
+            <NavLink to="/my-issues">
+                <button>MY ISSUES</button>
+            </NavLink> 
+            <NavLink to="/comments">
+                <button>MY COMMENTS</button>
+            </NavLink> 
+            <NavLink to="/new">
+                <button>ADD NEW ISSUE</button>
+            </NavLink> 
+            <button onClick={logoutUser}>Logout</button> 
             <hr/>
+            </nav>
+            
           </div>
       );
   }
-}
+// }
 
 
 export default NavBar;

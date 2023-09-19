@@ -4,32 +4,32 @@ import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignupForm";
 
-function Login() {
-    const { login, loggedIn, setLoggedIn } = useContext(UserContext);
-    const navigate = useNavigate();
-    
+function LoginOrSignup() {
+    const { login, signup, loggedIn, user } = useContext(UserContext);
+    const [showLogin, setShowLogin] = useState(true)
     
     return (
         <div id="login">
-        <h1>have you SEEN IT?</h1>
-        <h4>review the movies you've seen.<br></br>
-        watch the ones you haven't.</h4><br></br>
+        <h1>STUDEBTHOOD</h1>
+        <h4>Share your issues<br></br>
+        someone who has experienced similar can help!</h4><br></br>
         
-        {loggedIn ? (
+        {showLogin ? (
             <>
-            <LoginForm onLogin={login}/>
+            <LoginForm />
             <p>Don't have an account?</p>
-            <button onClick={() => setLoggedIn(false)}>Sign Up</button>
+            <button onClick={() => setShowLogin(false)}>Sign Up</button>
             </>
         ) : (
             <>
             <SignUpForm onLogin={login}/>
             <p>Already have an account?</p>
-            <button onClick={() => setLoggedIn(true)}>Log In</button>
+            <button onClick={() => setShowLogin(true)}>Log In</button>
             </>
         )}
+
         </div>
   )
 }
 
-export default Login
+export default LoginOrSignup

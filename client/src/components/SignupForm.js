@@ -34,7 +34,7 @@ function SignUpForm( ) {
     .then(user => {
         if (!user.errors) {
             signup(user)
-            navigate('/')
+            navigate('/loginform')
         } else {
             setUsername("")
             setEmail("")
