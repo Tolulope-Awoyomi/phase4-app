@@ -9,7 +9,7 @@ import "./App.css"
 import AllIssuesList from "../pages/AllIssuesList";
 import IssueCard from "../pages/IssueCard";
 import NewIssue from "../pages/NewIssue";
-import UserIssueList from "../pages/UserIssueList";
+import MyCommentsList from "../pages/MyCommentsList";
 import MyIssuesList from "../pages/MyIssuesList";
 import LoginOrSignup from "./LoginOrSignup";
 
@@ -39,7 +39,7 @@ function App() {
           <Route path="/issues" element={<AllIssuesList issues={issues} />} />
           <Route path="/issues/:id" element={<IssueCard issues={issues} setIssues={setIssues}/>} />
           <Route path="/new" element={<NewIssue handleAddIssue={handleAddIssue} />} />
-          <Route path="/comments" element={<UserIssueList issues={issues} setIssues={setIssues} />} />
+          <Route path="/my-comments" element={<MyCommentsList issues={issues} setIssues={setIssues} />} />
           <Route path="/my-issues" element={<MyIssuesList />} />
         </Routes>
 
