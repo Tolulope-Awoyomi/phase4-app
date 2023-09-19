@@ -1,53 +1,35 @@
 class IssuesController < ApplicationController
-    before_action :set_issue, only: %i[ show update destroy ]
-    before_action :authenticate_user!, except: [:index, :show]
+    skip_before_action :authorize, only: :index
 
-
-  # GET /issues
   def index
     issues = Issue.all
     render json: issues
   end
 
   def show
-    render json: @issue
+    issue = Issue.find_by(id: params[:id])
+    render json: issue
   end
 
   def create
-    issue = Issue.create!(issue_params)
-    if issue
-      render json: issue, status: :created
-    else
-      render json: { errors: ["validation errors"] }, status: :unprocessable_entity
-    end
+    issue = Issue.create(movie_params)
+    render json: issue, status: :created
   end
 
   def update
-    if @issue 
-      if @issue.update(issue_params)
-        render json: @issue, status: :accepted
-      else
-        render json: { errors: @issue.errors.full_messages }, status: :unprocessable_entity
-      end
-    else
-      render json: { error: ["Issue not found"] }, status: :not_found
-    end
+    issue = Issue.find(params[:id])
+    issue.update!(issue_params)
+    render json: issue, status: 202
   end
 
   def destroy
-    if @issue
-      @issue.destroy
-      head :no_content
-    else
-      render json: { error: "Issue not found" }, status: :not_found
-    end
+    issue = Issue.find(params[:id])
+    issue.destroy 
+    head :no_content
   end
 
   
   private
-  def set_issue
-    @issue = Issue.find_by(id: params[:id])
-  end
 
   def issue_params
     params.permit(:title, :description, :category)
