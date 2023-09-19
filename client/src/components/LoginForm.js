@@ -26,7 +26,7 @@ function LoginForm() {
     .then(user => {
       if (!user.errors) {
         login(user);
-        navigate('/home');
+        navigate('/myhome');
       } else {
         setUsername("");
         setPassword("");

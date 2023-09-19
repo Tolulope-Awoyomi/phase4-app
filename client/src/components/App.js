@@ -34,8 +34,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route exact path="/" element={<LoginOrSignup issues={issues} />} />
-          <Route exact path="/loginform" element={<LoginForm issues={issues} />} />
-          <Route exact path="/myhome" element={<UserHome  />} />
+          <Route path="/loginform" element={<LoginForm issues={issues} />} />
+          <Route path="/myhome" element={<UserHome  />} />
           <Route path="/issues" element={<AllIssuesList issues={issues} />} />
           <Route path="/issues/:id" element={<IssueCard issues={issues} setIssues={setIssues}/>} />
           <Route path="/new" element={<NewIssue handleAddIssue={handleAddIssue} />} />

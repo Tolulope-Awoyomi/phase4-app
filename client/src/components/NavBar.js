@@ -15,19 +15,11 @@ function NavBar() {
     })
     .then(() => {
         logout()
-        // navigate('/')
+        navigate('/')
     })
   }
 
-//   if (loggedIn) {
-//     return (
-//         <div>
-//             <h1>Hello {user.username}</h1>
-//             <button onClick={logoutUser}>Logout</button>
-//             <hr/>
-//         </div>
-//     )
-//   } else {
+
     return (
 
 
@@ -39,7 +31,7 @@ function NavBar() {
             <NavLink to="/my-issues">
                 <button>MY ISSUES</button>
             </NavLink> 
-            <NavLink to="/comments">
+            <NavLink to="/my-comments">
                 <button>MY COMMENTS</button>
             </NavLink> 
             <NavLink to="/new">
