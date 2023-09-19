@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import { UserContext } from "./context/user";
 import Home from "./Home";
 import NavBar from "./NavBar";
 import SignUpForm from "./SignupForm";
-import Login from "./LoginForm";
+import LoginForm from "./LoginForm";
 import "./App.css"
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
     setIssues([newIssue, ...issues])
   }
 
-  if (!user) return <Login />
+  if (!user) return <LoginForm />
 
   return (
     <div className="App">

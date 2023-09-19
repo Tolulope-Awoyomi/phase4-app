@@ -15,7 +15,7 @@ function NavBar() {
     })
     .then(() => {
         logout()
-        navigate('/')
+        // navigate('/')
     })
   }
 
@@ -29,16 +29,19 @@ function NavBar() {
     )
   } else {
     return (
+
+
           <div>
-            <NavLink to="/login">
+            {/* <NavLink to="/login">
                 <button>Login</button>
             </NavLink>
             <NavLink to="/signup">
                 <button>Signup</button>
-            </NavLink>
+            </NavLink> */}
             {/* <NavLink to="/issues">
                 <button>Issues</button>
             </NavLink> */}
+            {/* <button onClick={logoutUser}>Logout</button> */}
             <hr/>
           </div>
       );
