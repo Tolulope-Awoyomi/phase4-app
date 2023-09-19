@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "./context/user";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorsList, setErrorsList] = useState([]);
@@ -26,7 +26,7 @@ function Login() {
     .then(user => {
       if (!user.errors) {
         login(user);
-        navigate('/');
+        // navigate('/');
       } else {
         setUsername("");
         setPassword("");
@@ -70,4 +70,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginForm;
