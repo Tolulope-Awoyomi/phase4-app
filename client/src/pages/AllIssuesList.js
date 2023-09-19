@@ -1,25 +1,37 @@
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import styled from "../styles/";
-import { Box, Button } from "../styles";
+import styled from "styled-components";
+import { Box, Button } from "../styles/";
+import { UserContext } from "../components/context/user";
 
-function AllIssuesList({issues}){
+function AllIssuesList(){
+  const [issues, setIssues] = useState([]);
+  const { user, login } = useContext(UserContext)
+
+
+  useEffect(() => {
+    fetch("/issues")
+    .then((r) => r.json())
+    .then(setIssues);
+  }, [])
 
     return (
         <Wrapper>
             {issues.length > 0 ? (
                 issues.map((issue) => (
-                    
-                        <Box key={issue.id}>
+                    <Issue key={issue.id}>
+                        <Box>
                         <img className="poster" alt={issue.title}src={issue.title}/>
                         <h2>{issue.title}</h2>
-                        <h4>{issue.description}</h4>
+                        <p>{issue.description}</p>
                         <p>
                             <em><b>Category:</b> {issue.category}</em>
                             &nbsp;·&nbsp;
+                            <cite>By {issue.user.username} </cite>
                         </p>
                         <Link to={`/issues/${issue.id}`}>Comments</Link>
                         </Box>
-                   
+                    </Issue>
                 ))
             ) : (
                 <>
@@ -39,7 +51,7 @@ const Wrapper = styled.section`
   text-align: center;
 `;
 
-const Movie = styled.article`
+const Issue = styled.article`
   margin-bottom: 24px;
 `;
 
