@@ -5,9 +5,6 @@ import { Box, Button } from "../styles/";
 import { UserContext } from "../components/context/user";
 
 function AllIssuesList({issues}){
-  
-  const { user, login } = useContext(UserContext)
-
 
   
     return (
@@ -16,7 +13,6 @@ function AllIssuesList({issues}){
                 issues.map((issue) => (
                     <Issue key={issue.id}>
                         <Box>
-                        <img className="poster" alt={issue.title}src={issue.title}/>
                         <h2>{issue.title}</h2>
                         <p>{issue.description}</p>
                         <p>
