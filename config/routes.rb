@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   
-  resources :comments, except: [:show, :index]
+  resources :comments
   resources :users, only: [:create, :show]
   resources :issues
 

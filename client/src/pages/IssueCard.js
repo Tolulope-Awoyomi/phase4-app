@@ -1,8 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import { Box } from "../styles";
-import NewIssue from "./NewIssue";
 import NewComment from "./NewComment";
 import { Button, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
@@ -11,9 +10,9 @@ function IssueCard({ issues, setIssues }) {
   const { id } = useParams();
   const [issue, setIssue] = useState({});
   const [newComment, setNewComment] = useState("");
-  const [toggleNewComment, setToggleNewComment] = useState(false);
+  const [editCommentId, setEditCommentId] = useState(null); // Track which comment is being edited
   const [status, setStatus] = useState("pending");
-  const { user, login, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const foundIssue = issues.find((issue) => issue.id === parseInt(id));
 
   useEffect(() => {
@@ -43,9 +42,11 @@ function IssueCard({ issues, setIssues }) {
       method: "DELETE",
     }).then((r) => {
       if (r.ok) {
-        const filteredComment = issue.issues_with_comments.filter((comment) => {
-          return comment.comment_id !== id;
-        });
+        const filteredComment = issue.issues_with_comments.filter(
+          (comment) => {
+            return comment.comment_id !== id;
+          }
+        );
         foundIssue.issues_with_comments = filteredComment;
         setIssue({ ...foundIssue });
         const newIssues = issues.map((issue) => {
@@ -64,51 +65,54 @@ function IssueCard({ issues, setIssues }) {
     });
   }
 
-  function handleUpdateComment(e, id) {
+  function handleEditComment(commentId) {
+    setEditCommentId(commentId);
+    const editedComment = foundIssue.issues_with_comments.find(
+      (comment) => comment.comment_id === commentId
+    );
+    setNewComment(editedComment.content);
+  }
+
+  function handleCancelEdit() {
+    setEditCommentId(null);
+    setNewComment("");
+  }
+
+  function handleUpdateComment(e, commentId) {
     e.preventDefault();
-    const addComment = { content: newComment };
-    fetch(`/comments/${id}`, {
+    const updatedComment = {
+      content: newComment,
+    };
+    fetch(`/comments/${commentId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(addComment),
+      body: JSON.stringify(updatedComment),
     })
       .then((r) => r.json())
       .then((data) => {
-        const individualComment = {
+        const updatedCommentWithUsername = {
           comment_id: data.id,
           content: data.content,
-          username: data.user.username,
+          username: data.user.username, // Include the username in the response data
         };
         const updatedComments = foundIssue.issues_with_comments.map((comment) =>
-          comment.comment_id === individualComment.comment_id
-            ? individualComment
+          comment.comment_id === updatedCommentWithUsername.comment_id
+            ? updatedCommentWithUsername
             : comment
         );
         foundIssue.issues_with_comments = updatedComments;
         setIssue({ ...foundIssue });
-        const newIssues = issues.map((issue) => {
-          if (foundIssue.id === issue.id) {
-            return foundIssue;
-          } else {
-            return issue;
-          }
-        });
-
-        setIssues(newIssues);
-        setToggleNewComment(false);
+        setEditCommentId(null);
+        setNewComment("");
       });
   }
 
   function hasUserCommented(param1) {
-    let result = false;
-    param1.issues_with_comments.forEach((issue) => {
-      if (issue.username === user.username) {
-        result = true;
-      }
-    });
-    return result;
+    return param1.issues_with_comments.some(
+      (issue) => issue.username === user.username
+    );
   }
 
   if (status === "pending") return <h2>Loading...</h2>;
@@ -130,46 +134,42 @@ function IssueCard({ issues, setIssues }) {
             user={user}
             setUser={setUser}
             issues={issues}
-          ></NewComment>
+          />
         )}
 
         {issue.issues_with_comments?.map((comment) => (
           <Box key={comment.comment_id}>
-            {comment.content}
-            <br></br>
-            <br></br>
-            by: <em>{comment.username}</em>
-            <br></br>
-            {comment.username === user.username ? (
+            {editCommentId === comment.comment_id ? (
+              <form onSubmit={(e) => handleUpdateComment(e, comment.comment_id)}>
+                <Label htmlFor="comment">Edit Comment</Label>
+                <Input
+                  type="text"
+                  id="comment"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+                <Button type="submit">Update</Button>
+                <Button onClick={handleCancelEdit}>Cancel</Button>
+              </form>
+            ) : (
               <>
-                <button onClick={() => handleDelete(comment.comment_id)}>
-                  Delete
-                </button>
-                <button
-                  onClick={() => setToggleNewComment((toggle) => !toggle)}
-                >
-                  Edit your Comment
-                </button>
-                {toggleNewComment ? (
-                  <form>
-                    <Label htmlFor="title">Comment</Label>
-                    <Input
-                      type="text"
-                      id="comment"
-                      value={issue.content}
-                      onChange={(e) => setNewComment(e.target.value)}
-                    />
-                    <Button
-                      onClick={(e) => handleUpdateComment(e, comment.comment_id)}
-                      color="primary"
-                      type="submit"
-                    >
-                      Submit Comment
+                {comment.content}
+                <br></br>
+                <br></br>
+                by: <em>{comment.username}</em>
+                <br></br>
+                {comment.username === user.username ? (
+                  <>
+                    <Button onClick={() => handleDelete(comment.comment_id)}>
+                      Delete
                     </Button>
-                  </form>
+                    <Button onClick={() => handleEditComment(comment.comment_id)}>
+                      Edit
+                    </Button>
+                  </>
                 ) : null}
               </>
-            ) : null}
+            )}
           </Box>
         ))}
       </Box>

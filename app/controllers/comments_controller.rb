@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    skip_before_action :authorize, only: [:show]
+    before_action :set_current_user, :authorize, only: [:create, :update, :destroy]
 
     def create 
         comment = @current_user.comments.create!(comment_params)
@@ -8,9 +8,11 @@ class CommentsController < ApplicationController
 
     def show
         comment = Comment.find(params[:id])
-        render json: comment, status: :ok
-      rescue ActiveRecord::RecordNotFound
-        render json: { error: 'Comment not found' }, status: :not_found
+        if comment
+            render json: comment, status: :ok
+        else
+            render json: { error: 'Comment not found' }, status: :not_found
+        end
     end
 
     def update 
@@ -27,8 +29,12 @@ class CommentsController < ApplicationController
 
     private
     def comment_params
-        params.permit(:content :issue_id)
+        params.permit(:content, :issue_id)
     end
+    
+    def set_current_user
+        @current_user = User.find_by(id: session[:user_id])
+      end
 
     def authorize
         return render json: { errors: [ "Not authorized" ] }, status: :unauthorized unless session[:user_id]
