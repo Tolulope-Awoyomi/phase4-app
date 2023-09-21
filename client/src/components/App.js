@@ -38,7 +38,7 @@ function App() {
           <Route path="/myhome" element={<UserHome  />} />
           <Route path="/issues" element={<AllIssuesList issues={issues} />} />
           <Route path="/issues/:id" element={<IssueCard issues={issues} setIssues={setIssues}/>} />
-          <Route path="/new" element={<NewIssue handleAddIssue={handleAddIssue} />} />
+          <Route path="/new-issue" element={<NewIssue handleAddIssue={handleAddIssue} />} />
           <Route path="/my-comments" element={<MyCommentsList issues={issues} setIssues={setIssues} />} />
           <Route path="/my-issues" element={<MyIssuesList />} />
         </Routes>

@@ -34,7 +34,7 @@ function NavBar() {
             <NavLink to="/my-comments">
                 <button>MY COMMENTS</button>
             </NavLink> 
-            <NavLink to="/new">
+            <NavLink to="/new-issue">
                 <button>ADD NEW ISSUE</button>
             </NavLink> 
             <button onClick={logoutUser}>Logout</button> 

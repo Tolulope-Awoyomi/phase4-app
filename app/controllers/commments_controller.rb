@@ -1,3 +1,0 @@
-class CommmentsController < ApplicationController
-
-end
