@@ -12,7 +12,7 @@ class IssuesController < ApplicationController
   end
 
   def create
-    issue = Issue.create(movie_params)
+    issue = Issue.create(issue_params)
     render json: issue, status: :created
   end
 

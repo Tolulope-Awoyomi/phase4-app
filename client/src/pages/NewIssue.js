@@ -5,9 +5,9 @@ import { Button, Error, FormField, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
 
 function NewIssue({ handleAddIssue }) {
-  const [title, setTitle] = useState("New Issue");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("New Issue...");
+  const [description, setDescription] = useState("New Description...");
+  const [category, setCategory] = useState("New Category...");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function NewIssue({ handleAddIssue }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/movies", {
+    fetch("/issues", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function NewIssue({ handleAddIssue }) {
         r.json().then((issueFromForm) => {
             setErrors([]);
             handleAddIssue(issueFromForm);
-            navigate("/");
+            navigate("/issues");
           });
 
       } else {
