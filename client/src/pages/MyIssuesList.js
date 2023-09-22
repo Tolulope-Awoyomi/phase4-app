@@ -3,7 +3,7 @@ import { UserContext } from "../components/context/user";
 import { Button, Box, Input, Label } from "../styles";
 
 function MyIssuesList({ issues, setIssues }) {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [issueBeingEdited, setIssueBeingEdited] = useState(null);
   const [newComment, setNewComment] = useState("");
   const [editCommentId, setEditCommentId] = useState(null);
@@ -45,6 +45,7 @@ function MyIssuesList({ issues, setIssues }) {
             };
           });
           setIssues(updatedIssues);
+          setUser({ ...user, issues: updatedIssues });
         }
       })
       .catch((error) => {
