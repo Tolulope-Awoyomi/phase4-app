@@ -91,7 +91,7 @@ function IssueCard({ issues, setIssues }) {
         const updatedCommentWithUsername = {
           comment_id: data.id,
           content: data.content,
-          username: data.user.username, // Include the username in the response data
+          username: data.user.username
         };
         const updatedComments = foundIssue.issues_with_comments.map((comment) =>
           comment.comment_id === updatedCommentWithUsername.comment_id

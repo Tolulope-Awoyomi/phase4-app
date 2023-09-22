@@ -40,7 +40,7 @@ function App() {
           <Route path="/issues/:id" element={<IssueCard issues={issues} setIssues={setIssues}/>} />
           <Route path="/new-issue" element={<NewIssue handleAddIssue={handleAddIssue} />} />
           <Route path="/my-comments" element={<MyCommentsList issues={issues} setIssues={setIssues} />} />
-          <Route path="/my-issues" element={<MyIssuesList />} />
+          <Route path="/my-issues" element={<MyIssuesList issues={issues} setIssues={setIssues}/>} />
         </Routes>
 
     </div>

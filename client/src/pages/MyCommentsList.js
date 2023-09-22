@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Box, Button, Input, Label } from "../styles";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../components/context/user";
 
 function MyCommentsList({issues, setIssues}) {
@@ -15,6 +15,11 @@ function MyCommentsList({issues, setIssues}) {
       setIssueBeingEdited(id)
     }
   }
+  useEffect(() => {
+    console.log("newComment:", newComment);
+    console.log("issueBeingEdited:", issueBeingEdited);
+  }, [newComment, issueBeingEdited]);
+  
 
   function handleDeleteComment (id) {
     fetch(`/comments/${id}`, {
@@ -51,13 +56,15 @@ function MyCommentsList({issues, setIssues}) {
 
   function handleUpdateComment (e, id) {
     e.preventDefault()
-    const addComment = {content: newComment}
+    const addComment = {
+      content: newComment,
+    }
     fetch(`/comments/${id}`, {
       method: "PATCH", 
       headers: {
-        "Content-Type" : "application/json"
+        "Content-Type": "application/json",
       }, 
-      body: JSON.stringify(addComment)
+      body: JSON.stringify(addComment),
     })
      .then(r => {
       if (r.ok) {
@@ -123,6 +130,7 @@ function MyCommentsList({issues, setIssues}) {
                             <Input
                               type="text"
                               id="comment"
+                              value={newComment}
                               onChange={(e) => setNewComment(e.target.value)}
                             />
                                 <Button onClick={(e) => handleUpdateComment(e, comment.comment_id)} color="primary" type="submit">

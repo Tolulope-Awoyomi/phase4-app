@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     def update 
         comment = @current_user.comments.find(params[:id])
         comment.update!(comment_params)
-        render json: comment, status: 202
+        render json: comment, status: :ok
     end
 
     def destroy 

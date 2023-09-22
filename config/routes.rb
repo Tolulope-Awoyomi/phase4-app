@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get "comments/:word", to: "comments#word"
+  # get "comments/:word", to: "comments#word"
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   post '/signup', to: 'users#create'
