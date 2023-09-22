@@ -5,9 +5,9 @@ import { Button, Error, FormField, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
 
 function NewIssue({ handleAddIssue }) {
-  const [title, setTitle] = useState("New Issue...");
-  const [description, setDescription] = useState("New Description...");
-  const [category, setCategory] = useState("New Category...");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

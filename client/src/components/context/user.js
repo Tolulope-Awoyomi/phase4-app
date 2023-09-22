@@ -20,6 +20,7 @@ function UserProvider({ children }) {
             }
         })
     }, [])
+    console.log(user)
 
     function login(user) {
         setUser(user)

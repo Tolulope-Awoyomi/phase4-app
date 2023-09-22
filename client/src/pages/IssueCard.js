@@ -8,16 +8,14 @@ import { UserContext } from "../components/context/user";
 
 function IssueCard({ issues, setIssues }) {
   const { id } = useParams();
-  const [issue, setIssue] = useState({});
   const [newComment, setNewComment] = useState("");
-  const [editCommentId, setEditCommentId] = useState(null); // Track which comment is being edited
+  const [editCommentId, setEditCommentId] = useState(null); 
   const [status, setStatus] = useState("pending");
   const { user, setUser } = useContext(UserContext);
   const foundIssue = issues.find((issue) => issue.id === parseInt(id));
 
   useEffect(() => {
     if (foundIssue) {
-      setIssue(foundIssue);
       setStatus("found");
     } else {
       setStatus("rejected");
@@ -26,7 +24,6 @@ function IssueCard({ issues, setIssues }) {
 
   function handleAddComment(updatedComments) {
     foundIssue.issues_with_comments = updatedComments;
-    setIssue({ ...foundIssue });
     const newIssues = issues.map((issue) => {
       if (foundIssue.id === issue.id) {
         return foundIssue;
@@ -42,13 +39,12 @@ function IssueCard({ issues, setIssues }) {
       method: "DELETE",
     }).then((r) => {
       if (r.ok) {
-        const filteredComment = issue.issues_with_comments.filter(
+        const filteredComments = foundIssue.issues_with_comments.filter(
           (comment) => {
             return comment.comment_id !== id;
           }
         );
-        foundIssue.issues_with_comments = filteredComment;
-        setIssue({ ...foundIssue });
+        foundIssue.issues_with_comments = filteredComments;
         const newIssues = issues.map((issue) => {
           if (foundIssue.id === issue.id) {
             return foundIssue;
@@ -103,7 +99,6 @@ function IssueCard({ issues, setIssues }) {
             : comment
         );
         foundIssue.issues_with_comments = updatedComments;
-        setIssue({ ...foundIssue });
         setEditCommentId(null);
         setNewComment("");
       });
@@ -121,15 +116,15 @@ function IssueCard({ issues, setIssues }) {
   return (
     <Wrapper>
       <Box>
-        <h1>Title: {issue.title}</h1>
-        <h3>Issue: {issue.description}</h3>
-        <h5>Category: {issue.category}</h5>
+        <h1>Title: {foundIssue.title}</h1>
+        <h3>Issue: {foundIssue.description}</h3>
+        <h5>Category: {foundIssue.category}</h5>
       </Box>
       <Box>
         {hasUserCommented(foundIssue) ? null : (
           <NewComment
             handleAddComment={handleAddComment}
-            issueId={issue.id}
+            issueId={foundIssue.id}
             userId={user.id}
             user={user}
             setUser={setUser}
@@ -137,7 +132,7 @@ function IssueCard({ issues, setIssues }) {
           />
         )}
 
-        {issue.issues_with_comments?.map((comment) => (
+        {foundIssue.issues_with_comments?.map((comment) => (
           <Box key={comment.comment_id}>
             {editCommentId === comment.comment_id ? (
               <form onSubmit={(e) => handleUpdateComment(e, comment.comment_id)}>

@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-    before_action :authorize, only: [:show, :create, :update, :destroy]
+    skip_before_action :authorize, only: [:index]
 
   def index
     issues = Issue.all
@@ -33,10 +33,6 @@ class IssuesController < ApplicationController
 
   def issue_params
     params.permit(:title, :description, :category)
-  end
-
-  def authorize
-    return render json: { errors: [ "Not authorized" ] }, status: :unauthorized unless session[:user_id]
   end
 
 end
