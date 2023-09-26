@@ -12,8 +12,13 @@ function NewIssue({ handleAddIssue }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+  const [issues, setIssues] = useState([])
 
 
+  function handleAddIssue(newIssue) {
+    setIssues([newIssue, ...issues])
+  }
+  
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);

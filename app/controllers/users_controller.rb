@@ -22,6 +22,16 @@ class UsersController < ApplicationController
         end
     end
 
+    def commented_issues
+        user = User.find_by(id: params[:user_id])
+        if user
+          issues_commented_on = user.comments.map(&:issue).uniq
+          render json: issues_commented_on
+        else
+          render json: { error: 'User not found' }, status: :not_found
+        end
+      end
+
     # tentative - update and destroy
     def update
         if @user 

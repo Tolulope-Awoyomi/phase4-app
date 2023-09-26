@@ -30,10 +30,7 @@ function NavBar() {
             </NavLink>
             <NavLink to="/my-issues">
                 <button>MY ISSUES</button>
-            </NavLink> 
-            <NavLink to="/my-comments">
-                <button>MY COMMENTS</button>
-            </NavLink> 
+            </NavLink>  
             <NavLink to="/new-issue">
                 <button>ADD NEW ISSUE</button>
             </NavLink> 

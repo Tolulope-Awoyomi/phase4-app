@@ -5,14 +5,17 @@ import { Box } from "../styles";
 import NewComment from "./NewComment";
 import { Button, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
+import MyIssuesList from "./MyIssuesList";
 
-function IssueCard({ issues, setIssues }) {
+function IssueCard() {
   const { id } = useParams();
   const [newComment, setNewComment] = useState("");
-  const [editCommentId, setEditCommentId] = useState(null); 
+  const [editCommentId, setEditCommentId] = useState(null);
   const [status, setStatus] = useState("pending");
-  const { user, setUser } = useContext(UserContext);
-  const foundIssue = issues.find((issue) => issue.id === parseInt(id));
+  const { user, setUser } = useContext(UserContext); 
+  const [issues, setIssues] = useState([])
+
+  const foundIssue = user && user.issues ? user.issues.find((issue) => issue.id === parseInt(id)) : null;;
 
   useEffect(() => {
     if (foundIssue) {
@@ -21,6 +24,16 @@ function IssueCard({ issues, setIssues }) {
       setStatus("rejected");
     }
   }, [id, issues, foundIssue]);
+
+  useEffect(() => {
+    if (!user || !user.issues) {
+      return <h2>Loading...</h2>;
+    }
+    
+    if (!foundIssue) {
+      return <h2>Error: Issue doesn't exist</h2>;
+    }
+  }, [id, issues, foundIssue])
 
   function handleAddComment(updatedComments) {
     foundIssue.issues_with_comments = updatedComments;
@@ -91,7 +104,7 @@ function IssueCard({ issues, setIssues }) {
         const updatedCommentWithUsername = {
           comment_id: data.id,
           content: data.content,
-          username: data.user.username
+          username: data.user.username,
         };
         const updatedComments = foundIssue.issues_with_comments.map((comment) =>
           comment.comment_id === updatedCommentWithUsername.comment_id
@@ -168,6 +181,8 @@ function IssueCard({ issues, setIssues }) {
           </Box>
         ))}
       </Box>
+
+
     </Wrapper>
   );
 }
