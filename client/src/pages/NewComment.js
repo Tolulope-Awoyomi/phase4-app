@@ -31,14 +31,15 @@ function NewComment({ handleAddComment, userId, issueId, user, setUser, issues }
         setCommentContent("");
         setErrors([]);
         handleAddComment(issueFromForm.issues_with_comments);
-        // Assuming userIssues is an array, we update it by adding the new issue
         setUser((prevUser) => ({
           ...prevUser,
           issues: [...prevUser.issues, issueFromForm],
         }));
       })
       .catch((err) => {
-        setErrors(err);
+        console.error(err); 
+        const errorMessages = err.errors || ["An error occurred"];
+        setErrors(errorMessages);
       });
   }
 

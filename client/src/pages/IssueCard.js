@@ -7,15 +7,14 @@ import { Button, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
 import MyIssuesList from "./MyIssuesList";
 
-function IssueCard() {
+function IssueCard({issues, setIssues}) {
   const { id } = useParams();
   const [newComment, setNewComment] = useState("");
   const [editCommentId, setEditCommentId] = useState(null);
   const [status, setStatus] = useState("pending");
   const { user, setUser } = useContext(UserContext); 
-  const [issues, setIssues] = useState([])
 
-  const foundIssue = user && user.issues ? user.issues.find((issue) => issue.id === parseInt(id)) : null;;
+  const foundIssue = issues?.find((issue) => issue.id === parseInt(id));
 
   useEffect(() => {
     if (foundIssue) {
@@ -25,27 +24,18 @@ function IssueCard() {
     }
   }, [id, issues, foundIssue]);
 
-  useEffect(() => {
-    if (!user || !user.issues) {
-      return <h2>Loading...</h2>;
-    }
-    
-    if (!foundIssue) {
-      return <h2>Error: Issue doesn't exist</h2>;
-    }
-  }, [id, issues, foundIssue])
 
   function handleAddComment(updatedComments) {
-    foundIssue.issues_with_comments = updatedComments;
-    const newIssues = issues.map((issue) => {
-      if (foundIssue.id === issue.id) {
-        return foundIssue;
-      } else {
-        return issue;
-      }
-    });
+    const updatedIssue = { ...foundIssue };
+    updatedIssue.issues_with_comments = updatedComments;
+  
+    const newIssues = issues.map((issue) =>
+      issue.id === updatedIssue.id ? updatedIssue : issue
+    );
+  
     setIssues(newIssues);
   }
+  
 
   function handleDelete(id) {
     fetch(`/comments/${id}`, {

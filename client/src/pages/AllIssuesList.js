@@ -4,30 +4,8 @@ import styled from "styled-components";
 import { Box, Button } from "../styles/";
 import { UserContext } from "../components/context/user";
 
-function AllIssuesList() {
+function AllIssuesList({issues, setIssues, loading}) {
   const { user, setUser } = useContext(UserContext);
-  const [loading, setLoading] = useState(true);
-  const [issues, setIssues] = useState([])
-
-  useEffect(() => {
-    // Fetch the list of issues and update the user's issues
-    fetch("/issues")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Failed to fetch issues");
-        }
-      })
-      .then((data) => {
-        setIssues(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, [setIssues]);
 
   if (loading) {
     return (

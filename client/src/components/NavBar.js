@@ -21,8 +21,6 @@ function NavBar() {
 
 
     return (
-
-
           <div className="header">
             <nav>
             <NavLink to="/issues">
