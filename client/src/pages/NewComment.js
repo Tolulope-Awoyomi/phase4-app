@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
+import { Error, FormField } from "../styles";
 
 function NewComment({ handleAddComment, userId, issueId, user, setUser, issues }) {
   const [commentContent, setCommentContent] = useState("");
@@ -37,7 +38,7 @@ function NewComment({ handleAddComment, userId, issueId, user, setUser, issues }
         }));
       })
       .catch((err) => {
-        const errorMessages = err.errors || ["An error occurred"];
+        const errorMessages = err || ["An error occurred"]; 
         setErrors(errorMessages);
       });
   }
@@ -54,11 +55,11 @@ function NewComment({ handleAddComment, userId, issueId, user, setUser, issues }
           onChange={(e) => setCommentContent(e.target.value)}
         />
       </div>
-      {errors?.map((err, index) => (
-        <p key={index} style={{ color: "red" }}>
-          {err}
-        </p>
-      ))}
+      <FormField>
+            {errors?.map((err) => (
+              <Error key={err}>{err}</Error>
+            ))}
+          </FormField>
       <button type="submit">Submit</button>
     </form>
   );

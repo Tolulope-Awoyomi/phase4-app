@@ -15,21 +15,33 @@ class CommentsController < ApplicationController
         if comment
             render json: comment, status: :ok
         else
-            render json: { error: 'Comment not found' }, status: :not_found
+            render json: { errors: comment.errors.full_messages }, status: :not_found
         end
     end
 
     def update 
         comment = @current_user.comments.find(params[:id])
-        comment.update!(comment_params)
-        render json: comment, status: :ok
+        if comment
+            if comment.update(comment_params)
+                render json: comment, status: :ok
+            else
+            render json: { errors: comment.errors.full_messages }, status: :unprocessable_entity
+            end
+        else
+            render json: { error: 'Comment not found' }, status: :not_found
+        end
     end
 
     def destroy 
         comment = @current_user.comments.find(params[:id])
-        comment.destroy 
-        head :no_content
+        if comment
+            comment.destroy 
+            head :no_content
+        else
+            render json: { error: 'Comment not found' }, status: :not_found
+        end
     end
+
 
     def word
         input_word = params[:word].downcase
