@@ -1,5 +1,29 @@
+:root {
+  --font-color-light: rgb(255, 255, 255);
+  --background-light: rgb(50, 50, 50);
+  --background-lighter: rgb(101, 101, 101);
+  --font-color-dark: rgb(255, 255, 255);
+  --background-dark:  rgb(50, 50, 50);
+  --background-darker: rgb(50, 50, 50);
+  --transition-duration: 0.3s;
+}
+
 .App {
   text-align: center;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  background: var(--background);
+  color: var(--font-color);
+  box-shadow: 4px 4px 10px rgba(33, 33, 33, 0.2);
+  border-radius: 10px;
+  transition: all var(--transition-duration);
+}
+
+.App.dark {
+  --font-color: var(--font-color-dark);
+  --background: var(--background-dark);
+  --background-light: var(--background-darker);
 }
 
 .App-logo {
@@ -9,23 +33,23 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite var(--logo-spin-duration) linear;
   }
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--primary-background-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--primary-text-color);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--primary-link-color);
 }
 
 @keyframes App-logo-spin {

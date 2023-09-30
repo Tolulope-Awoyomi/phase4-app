@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 const COLORS = {
   primary: {
-    "--main": "indigo",
+    "--main": "#2196F3", // Soft Blue
     "--accent": "white",
   },
   secondary: {
-    "--main": "lavenderblush",
-    "--accent": "indigo",
+    "--main": "#9E9E9E", // Warm Gray
+    "--accent": "#81C784", // Calming Green
   },
 };
 
@@ -29,6 +29,7 @@ const ButtonBase = styled.button`
   border-radius: 6px;
   padding: 8px 16px;
   text-decoration: none;
+  margin-right: 8px; /* Add margin-right for spacing */
 `;
 
 const FillButton = styled(ButtonBase)`

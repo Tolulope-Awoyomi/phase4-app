@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { UserContext } from "./context/user";
 import UserHome from "./UserHome";
@@ -10,15 +10,22 @@ import IssueCard from "../pages/IssueCard";
 import NewIssue from "../pages/NewIssue";
 import MyIssuesList from "../pages/MyIssuesList";
 import LoginOrSignup from "./LoginOrSignup";
+import Header from "./Header";
 
 function App() {
   const { user } = useContext(UserContext);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   if (!user) return <LoginForm />
 
+  function handleDarkModeClick() {
+    setIsDarkMode((isDarkMode) => !isDarkMode);
+  }
+
   return (
-    <div className="App">
+    <div className={"App " + (isDarkMode ? "dark" : "light")}>
         <NavBar />
+        <Header isDarkMode={isDarkMode} onDarkModeClick={handleDarkModeClick} />
           <Routes>
             <Route exact path="/" element={<LoginOrSignup />} />
             <Route path="/loginform" element={<LoginForm />} />

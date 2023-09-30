@@ -9,6 +9,7 @@ const FormField = styled.div`
   flex-direction: column;
   align-items: center; /* Center horizontally */
   text-align: center; /* Center text horizontally */
+  color: var(--secondary); /* Use the secondary color (Warm Gray) for text */
 `;
 
 export default FormField;

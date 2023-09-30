@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Error, FormField } from "../styles";
+import { Button, Error, FormField, Label, Input } from "../styles";
 
 function NewComment({ handleAddComment, userId, issueId, setUser }) {
   const [commentContent, setCommentContent] = useState("");
@@ -47,8 +47,8 @@ function NewComment({ handleAddComment, userId, issueId, setUser }) {
     <form onSubmit={handleSubmit}>
       <h2>Add New Comment</h2>
       <div>
-        <label htmlFor="review">Comment</label>
-        <input
+        <Label htmlFor="review">Comment</Label>
+        <Input
           type="text"
           id="review"
           value={commentContent}

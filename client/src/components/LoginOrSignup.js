@@ -11,8 +11,8 @@ function LoginOrSignup() {
     return (
         <div id="login">
             <h1>STUDEBTHOOD</h1>
-            <h4>Share your issues<br></br>
-            someone who has experienced similar can help!</h4><br></br>
+            <h3>Share your Student Debt issues...<br></br>
+            A problem shared is a problem half-solved!</h3><br></br>
             
             {showLogin ? (
                 <>

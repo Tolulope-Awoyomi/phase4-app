@@ -67,7 +67,7 @@ function SignUpForm( ) {
                 type="email"
                 id="email"
                 autoComplete="off"
-                placeholder="Enter your email addres..."
+                placeholder="Enter your email address..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             /> <br /> 

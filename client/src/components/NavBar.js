@@ -32,7 +32,7 @@ function NavBar() {
             <NavLink to="/new-issue">
                 <Button>ADD NEW ISSUE</Button>
             </NavLink> 
-            <Button onClick={logoutUser}>Logout</Button> 
+            <Button onClick={logoutUser}>Login/Logout</Button> 
             </nav>
           </div>
       );
