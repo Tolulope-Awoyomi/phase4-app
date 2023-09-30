@@ -5,7 +5,7 @@ import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 import { UserContext } from "../components/context/user";
 import { IssuesContext } from "../components/context/issues";
 
-function NewIssue({ handleAddIssue }) {
+function NewIssue() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -105,13 +105,13 @@ function NewIssue({ handleAddIssue }) {
       </WrapperChild>
       <WrapperChild>
         <h1>{title}</h1>
-        <p>
-          <em><b>Description:</b> {description} </em>
-        </p>
-        <p>
-          <em><b>Category:</b> {category} </em>
-        </p>
-        <cite>By {user.username}</cite>
+          <p>
+            <em><b>Description:</b> {description} </em>
+          </p>
+          <p>
+            <em><b>Category:</b> {category} </em>
+          </p>
+          <cite>By {user.username}</cite>
       </WrapperChild>
     </Wrapper>
   );

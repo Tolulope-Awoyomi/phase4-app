@@ -21,7 +21,6 @@ function AllIssuesList() {
     );
   }
 
-  // Filter issues based on selected category
   const filteredIssues = selectedCategory === 'All' ? issues : issues.filter(issue => issue.category === selectedCategory);
 
   return (
