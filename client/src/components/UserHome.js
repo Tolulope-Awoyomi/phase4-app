@@ -9,7 +9,7 @@ function UserHome() {
     if (loggedIn) {
         return (
             <div>
-                <h1>Welcome {user.username}!</h1>
+                <h1>Welcome, {user.username}!</h1>
                 <h4>Feel free to explore</h4>
             </div>
         )
