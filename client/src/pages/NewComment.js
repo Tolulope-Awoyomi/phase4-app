@@ -37,7 +37,6 @@ function NewComment({ handleAddComment, userId, issueId, user, setUser, issues }
         }));
       })
       .catch((err) => {
-        console.error(err); 
         const errorMessages = err.errors || ["An error occurred"];
         setErrors(errorMessages);
       });

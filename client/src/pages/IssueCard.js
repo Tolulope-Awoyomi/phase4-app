@@ -108,10 +108,14 @@ function IssueCard({issues, setIssues}) {
   }
 
   function hasUserCommented(param1) {
-    return param1.issues_with_comments.some(
-      (issue) => issue.username === user.username
-    );
+    if (param1 && param1.issues_with_comments) {
+      return param1.issues_with_comments.some(
+        (issue) => issue.username === user.username
+      );
+    }
+    return false;
   }
+  
 
   if (status === "pending") return <h2>Loading...</h2>;
   if (status === "rejected") return <h2>Error: Issue doesn't exist</h2>;

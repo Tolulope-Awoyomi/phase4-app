@@ -2,8 +2,12 @@ class CommentsController < ApplicationController
     before_action :set_current_user, only: [:create, :update, :destroy] 
 
     def create 
-        comment = @current_user.comments.create!(comment_params)
-        render json: comment.issue, status: 201
+        comment = @current_user.comments.create(comment_params)
+        if comment.save
+            render json: comment, status: :created
+        else
+            render json: { errors: comment.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
     def show
