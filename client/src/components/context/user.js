@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-// Create context
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
     const [user, setUser] = useState({})
-    const [loggedIn, setLoggedIn] = useState(false) // add loggedIn flag
+    const [loggedIn, setLoggedIn] = useState(false) 
 
     useEffect(() => {
         fetch('/me')
@@ -20,30 +19,28 @@ function UserProvider({ children }) {
             }
         })
     }, [])
-    console.log(user)
 
     function login(user) {
         setUser(user)
-        setLoggedIn(true) // set loggedIn flag
+        setLoggedIn(true) 
     }
 
     function logout() {
         setUser({})
-        setLoggedIn(false) // set loggedIn flag
+        setLoggedIn(false) 
     }
 
     function signup(user) {
         setUser(user)
-        setLoggedIn(true) // set loggedIn flag
+        setLoggedIn(true) 
     }
 
 
   return (
-    // add loggedIN to global state
     <UserContext.Provider value={{user, setUser, login, logout, signup, loggedIn}}>
         {children}
     </UserContext.Provider>
   )
 }
 
-export {UserContext, UserProvider };
+export {UserContext, UserProvider};

@@ -3,7 +3,7 @@ import { UserContext } from "./context/user";
 import { NavLink, useNavigate } from "react-router-dom";
 
 function NavBar() {
-    const {user, logout, loggedIn} = useContext(UserContext);
+    const {logout } = useContext(UserContext);
     const navigate = useNavigate()
 
   function logoutUser() {
@@ -18,7 +18,6 @@ function NavBar() {
         navigate('/')
     })
   }
-
 
     return (
           <div className="header">
@@ -39,7 +38,6 @@ function NavBar() {
           </div>
       );
   }
-// }
 
 
 export default NavBar;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// Create context
 const IssuesContext = React.createContext();
 
 function IssuesProvider({ children }) {
@@ -25,7 +24,7 @@ function IssuesProvider({ children }) {
             setLoading(false);
           });
       }, [setIssues]);
-      console.log(issues)
+      
   return (
     <IssuesContext.Provider value={{issues, setIssues, loading, setLoading}}>
         {children}
@@ -33,4 +32,4 @@ function IssuesProvider({ children }) {
   )
 }
 
-export {IssuesContext, IssuesProvider };
+export {IssuesContext, IssuesProvider};

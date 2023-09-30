@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./context/user";
+import { Error, FormField } from "../styles";
 
 function SignUpForm( ) {
   const [username, setUsername] = useState("");
@@ -42,11 +43,10 @@ function SignUpForm( ) {
             setPasswordConfirmation("")
             setImageUrl("")
             setBio("")
-            const errorLis = user.errors.map(e => <li key={e}>{e}</li>)
+            const errorLis = user.errors.map(e => <p key={e}>{e}</p>)
             setErrorsList(errorLis)
         }
     })
-    
   }
 
   return (
@@ -60,7 +60,7 @@ function SignUpForm( ) {
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-            /> <br /> <br />
+            /> <br /> 
 
             <label htmlFor="email">Email Address: </label>
             <input
@@ -70,7 +70,7 @@ function SignUpForm( ) {
                 placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-            /> <br /> <br />
+            /> <br /> 
      
             <label htmlFor="password">Password: </label>
             <input
@@ -79,9 +79,8 @@ function SignUpForm( ) {
                 autoComplete="new-password"
                 placeholder="Enter your password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                
-            /> <br /> <br />
+                onChange={(e) => setPassword(e.target.value)}  
+            /> <br />
       
             <label htmlFor="password">Password Confirmation: </label>
             <input
@@ -91,8 +90,7 @@ function SignUpForm( ) {
                 placeholder="Confirm your password"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
-                
-            /> <br /> <br />
+            /> <br /> 
       
             <label htmlFor="imageUrl">Profile Image: </label>
             <input
@@ -101,7 +99,7 @@ function SignUpForm( ) {
                 accept="image/*"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-            /> <br /> <br />
+            /> <br /> 
 
             <label htmlFor="bio">About Me: </label>
             <textarea
@@ -112,9 +110,12 @@ function SignUpForm( ) {
             ></textarea> <br /> <br />
             <input type="submit"></input>
         </form>
-        <ul>
-            {errorsList}
-        </ul>
+        
+        <FormField>
+            {errorsList?.map((err) => (
+              <Error key={err}>{err}</Error>
+            ))}
+        </FormField>
     </div>
   );
 }

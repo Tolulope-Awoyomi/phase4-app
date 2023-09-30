@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./context/user";
 import { useNavigate } from "react-router-dom";
+import { Error, FormField } from "../styles";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -31,7 +32,7 @@ function LoginForm() {
         setUsername("");
         setPassword("");
         const errorListItems = user.errors.map((error, index) => (
-          <li key={index}>{error}</li>
+          <p key={index}>{error}</p>
         ));
         setErrorsList(errorListItems);
       }
@@ -64,9 +65,11 @@ function LoginForm() {
       <input type="submit"></input>
     </form>
     
-    <ul>
-      {errorsList}
-    </ul>
+    <FormField>
+      {errorsList?.map((err) => (
+              <Error key={err}>{err}</Error>
+            ))}
+    </FormField>
   </div>
   );
 }

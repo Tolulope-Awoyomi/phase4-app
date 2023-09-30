@@ -19,4 +19,4 @@ function UserHome() {
     }
 }
 
-export default UserHome
+export default UserHome;
