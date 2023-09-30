@@ -34,7 +34,6 @@ function NavBar() {
             <button onClick={logoutUser}>Logout</button> 
             <hr/>
             </nav>
-            
           </div>
       );
   }

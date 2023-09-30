@@ -39,7 +39,6 @@ function LoginForm() {
     });
   }
   
-
   return (
     <div>
       <h4>Enter your login details</h4>

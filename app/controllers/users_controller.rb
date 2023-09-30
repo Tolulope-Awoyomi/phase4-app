@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    # before_action :one_user, only: [:show, :update, :destroy]
     skip_before_action :authorize, only: [:create]
 
     def create
@@ -28,37 +27,11 @@ class UsersController < ApplicationController
           issues_commented_on = user.comments.map(&:issue).uniq
           render json: issues_commented_on
         else
-          render json: { error: 'User not found' }, status: :not_found
+          render json: { error: ['User not found'] }, status: :not_found
         end
       end
 
-    # tentative - update and destroy
-    def update
-        if @user 
-            if @user.update(user_params)
-                render json: @user, status: :accepted
-            else
-                render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-            end
-        else
-            render json: { errors: ["User not found"]}, status: :not_found
-        end
-    end
-
-    def destroy
-        if @user 
-            @user.destroy
-            head :no_content, status: :deleted
-        else
-            render json: {error: "User not found"}, status: :not_found
-        end
-    end
-
     private
-
-    def one_user
-        @user = User.find_by(id: params[:id])
-    end
 
     def user_params
         params.permit(:username, :email, :password, :password_confirmation, :image_url, :bio)

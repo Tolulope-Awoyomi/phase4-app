@@ -15,10 +15,7 @@ function IssueCard() {
   const { user, setUser } = useContext(UserContext); 
   const { issues, setIssues } = useContext(IssuesContext);
 
-  const foundIssue = Array.isArray(issues)
-  ? issues.find((issue) => issue.id === parseInt(id))
-  : null;
-
+  const foundIssue = Array.isArray(issues) ? issues.find((issue) => issue.id === parseInt(id)) : null;
 
   useEffect(() => {
     if (foundIssue) {

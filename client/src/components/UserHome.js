@@ -3,7 +3,7 @@ import { UserContext } from "./context/user";
 import { useNavigate } from "react-router-dom";
 
 function UserHome() {
-    const { user, loggedIn } = useContext(UserContext)
+    const { user, loggedIn } = useContext(UserContext);
     const navigate = useNavigate();
 
     if (loggedIn) {
