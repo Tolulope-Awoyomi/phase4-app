@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Button, Error, FormField, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
+import { IssuesContext } from "../components/context/issues";
 
 function NewIssue({ handleAddIssue }) {
   const [title, setTitle] = useState("");
@@ -12,13 +13,13 @@ function NewIssue({ handleAddIssue }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const [issues, setIssues] = useState([])
+  const { issues, setIssues } = useContext(IssuesContext);
 
 
   function handleAddIssue(newIssue) {
     setIssues([newIssue, ...issues])
   }
-  
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);

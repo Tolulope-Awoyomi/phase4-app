@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { Box, Button, Input, Label } from "../styles";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../components/context/user";
+import { IssuesContext } from "../components/context/issues";
 
-function MyCommentsList({issues, setIssues}) {
+function MyCommentsList() {
   const [newComment, setNewComment] = useState("")
   const [issueBeingEdited, setIssueBeingEdited] = useState(null)
   const { user } = useContext(UserContext);
+  const { issues, setIssues } = useContext(IssuesContext);
  
   const toggleComment = (id) => {
     if(id === issueBeingEdited) { 

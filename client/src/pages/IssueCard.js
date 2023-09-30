@@ -5,16 +5,21 @@ import { Box } from "../styles";
 import NewComment from "./NewComment";
 import { Button, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
+import { IssuesContext } from "../components/context/issues";
 import MyIssuesList from "./MyIssuesList";
 
-function IssueCard({issues, setIssues}) {
+function IssueCard() {
   const { id } = useParams();
   const [newComment, setNewComment] = useState("");
   const [editCommentId, setEditCommentId] = useState(null);
   const [status, setStatus] = useState("pending");
   const { user, setUser } = useContext(UserContext); 
+  const { issues, setIssues } = useContext(IssuesContext);
 
-  const foundIssue = issues?.find((issue) => issue.id === parseInt(id));
+  const foundIssue = Array.isArray(issues)
+  ? issues.find((issue) => issue.id === parseInt(id))
+  : null;
+
 
   useEffect(() => {
     if (foundIssue) {

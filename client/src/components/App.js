@@ -14,28 +14,7 @@ import MyIssuesList from "../pages/MyIssuesList";
 import LoginOrSignup from "./LoginOrSignup";
 
 function App() {
-  const [issues, setIssues] = useState([])
-  const [loading, setLoading] = useState(true);
-  const { user, login } = useContext(UserContext)
-
-  useEffect(() => {
-    fetch("/issues")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Failed to fetch issues");
-        }
-      })
-      .then((data) => {
-        setIssues(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, [setIssues]);
+  const { user, login } = useContext(UserContext);
 
   if (!user) return <LoginForm />
 
@@ -46,8 +25,8 @@ function App() {
             <Route exact path="/" element={<LoginOrSignup />} />
             <Route path="/loginform" element={<LoginForm />} />
             <Route path="/myhome" element={<UserHome  />} />
-            <Route path="/issues" element={<AllIssuesList issues={issues} setIssues={setIssues} />} />
-            <Route path="/issues/:id" element={<IssueCard issues={issues} setIssues={setIssues} />} />
+            <Route path="/issues" element={<AllIssuesList />} />
+            <Route path="/issues/:id" element={<IssueCard />} />
             <Route path="/new-issue" element={<NewIssue />} />
             <Route path="/my-issues" element={<MyIssuesList />} />
           </Routes>

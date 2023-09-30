@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles/";
 import { UserContext } from "../components/context/user";
+import { IssuesContext } from "../components/context/issues";
 
-function AllIssuesList({issues, setIssues, loading}) {
+function AllIssuesList() {
   const { user, setUser } = useContext(UserContext);
+  const { issues, loading } = useContext(IssuesContext);
 
   if (loading) {
     return (

@@ -4,6 +4,7 @@ import './index.css';
 import App from './components/App';
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./components/context/user";
+import { IssuesProvider } from './components/context/issues';
 import { createGlobalStyle } from "styled-components";
 import reportWebVitals from './reportWebVitals';
 
@@ -26,9 +27,11 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <Router>
-    <UserProvider> 
-    <App />
-    </UserProvider>
+    <IssuesProvider>
+      <UserProvider> 
+        <App />
+      </UserProvider>
+    </IssuesProvider>
   </Router>,
   document.getElementById('root')
 );
