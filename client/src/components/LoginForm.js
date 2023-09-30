@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./context/user";
 import { useNavigate } from "react-router-dom";
-import { Error, FormField } from "../styles";
+import { Error, FormField, Input, Label } from "../styles";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -41,26 +41,28 @@ function LoginForm() {
   
   return (
     <div>
-      <h4>Enter your login details</h4>
+      <h3>Enter your login details</h3>
       <form onSubmit={handleSubmit}>
       
-      <label htmlFor="username">Username: </label>
-      <input
+      <Label htmlFor="username">Username </Label>
+      <Input
         type="text"
         id="username"
         autoComplete="off"
+        placeholder="Enter your username..."
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-      /> <br /> <br />
+      /> <br /> 
     
-      <label htmlFor="password">Password: </label>
-      <input
+      <Label htmlFor="password">Password </Label>
+      <Input
         type="password"
         id="password"
         autoComplete="current-password"
+        placeholder="Enter your password..."
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-      /> <br /> <br />
+      /> <br /> 
       <input type="submit"></input>
     </form>
     

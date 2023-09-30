@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Error, FormField } from "../styles";
+import { Button, Error, FormField } from "../styles";
 
 function NewComment({ handleAddComment, userId, issueId, setUser }) {
   const [commentContent, setCommentContent] = useState("");
@@ -60,7 +60,7 @@ function NewComment({ handleAddComment, userId, issueId, setUser }) {
               <Error key={err}>{err}</Error>
             ))}
       </FormField>
-      <button type="submit">Submit</button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 }

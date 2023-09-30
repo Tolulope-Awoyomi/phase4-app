@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./context/user";
-import { Error, FormField } from "../styles";
+import { Error, FormField, Input, Textarea, Label } from "../styles";
 
 function SignUpForm( ) {
   const [username, setUsername] = useState("");
@@ -52,48 +52,48 @@ function SignUpForm( ) {
   return (
     <div>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Username: </label>
-            <input
+            <Label htmlFor="username">Username </Label> 
+            <Input
                 type="text"
                 id="username"
                 autoComplete="off"
-                placeholder="Enter your username"
+                placeholder="Enter your username..."
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-            /> <br /> 
+            /> <br />  
 
-            <label htmlFor="email">Email Address: </label>
-            <input
+            <Label htmlFor="email">Email Address </Label> 
+            <Input
                 type="email"
                 id="email"
                 autoComplete="off"
-                placeholder="Enter your email address"
+                placeholder="Enter your email addres..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             /> <br /> 
      
-            <label htmlFor="password">Password: </label>
-            <input
+            <Label htmlFor="password">Password </Label> 
+            <Input
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                placeholder="Enter your password"
+                placeholder="Enter your password..."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}  
-            /> <br />
+            /> <br /> 
       
-            <label htmlFor="password">Password Confirmation: </label>
-            <input
+            <Label htmlFor="password">Password Confirmation </Label>
+            <Input
                 type="password"
                 id="password_confirmation"
                 autoComplete="new-password"
-                placeholder="Confirm your password"
+                placeholder="Confirm your password..."
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
-            /> <br /> 
+            /> <br />
       
-            <label htmlFor="imageUrl">Profile Image: </label>
-            <input
+            <Label htmlFor="imageUrl">Profile Image </Label> 
+            <Input
                 type="file"
                 id="imageUrl"
                 accept="image/*"
@@ -101,16 +101,16 @@ function SignUpForm( ) {
                 onChange={(e) => setImageUrl(e.target.value)}
             /> <br /> 
 
-            <label htmlFor="bio">About Me: </label>
-            <textarea
+            <Label htmlFor="bio">About Me </Label> 
+            <Textarea
                 id="bio"
                 placeholder="Write a little about yourself (optional)"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-            ></textarea> <br /> <br />
+            /> <br />
             <input type="submit"></input>
         </form>
-        
+
         <FormField>
             {errorsList?.map((err) => (
               <Error key={err}>{err}</Error>

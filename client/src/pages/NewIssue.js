@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { Button, Error, FormField, Input, Label } from "../styles";
+import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 import { UserContext } from "../components/context/user";
 import { IssuesContext } from "../components/context/issues";
 
@@ -64,7 +64,7 @@ function NewIssue({ handleAddIssue }) {
           </FormField>
           <FormField>
             <Label htmlFor="description">Description</Label>
-            <Input
+            <Textarea
               type="text"
               id="description"
               value={description}

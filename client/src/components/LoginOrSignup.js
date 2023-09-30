@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "./context/user";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignupForm";
+import { Button } from "../styles";
 
 function LoginOrSignup() {
     const { login } = useContext(UserContext);
@@ -17,13 +18,13 @@ function LoginOrSignup() {
                 <>
                 <LoginForm />
                 <p>Don't have an account?</p>
-                <button onClick={() => setShowLogin(false)}>Sign Up</button>
+                <Button onClick={() => setShowLogin(false)}>Sign Up</Button>
                 </>
             ) : (
                 <>
                 <SignUpForm onLogin={login}/>
                 <p>Already have an account?</p>
-                <button onClick={() => setShowLogin(true)}>Log In</button>
+                <Button onClick={() => setShowLogin(true)}>Log In</Button>
                 </>
             )}
         </div>

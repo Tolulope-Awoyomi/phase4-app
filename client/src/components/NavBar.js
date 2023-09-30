@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "./context/user";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Button } from "../styles";
 
 function NavBar() {
     const {logout } = useContext(UserContext);
@@ -23,16 +24,15 @@ function NavBar() {
           <div className="header">
             <nav>
             <NavLink to="/issues">
-                <button>ALL ISSUES</button>
+                <Button>ALL ISSUES</Button>
             </NavLink>
             <NavLink to="/my-issues">
-                <button>MY ISSUES</button>
+                <Button>MY ISSUES</Button>
             </NavLink>  
             <NavLink to="/new-issue">
-                <button>ADD NEW ISSUE</button>
+                <Button>ADD NEW ISSUE</Button>
             </NavLink> 
-            <button onClick={logoutUser}>Logout</button> 
-            <hr/>
+            <Button onClick={logoutUser}>Logout</Button> 
             </nav>
           </div>
       );
