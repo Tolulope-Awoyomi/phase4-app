@@ -1,11 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles/";
 import { IssuesContext } from "../components/context/issues";
+import Filter from "../components/Filter";
 
 function AllIssuesList() {
   const { issues, loading } = useContext(IssuesContext);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
+  function handleCategoryChange(category) {
+    setSelectedCategory(category);
+  }
 
   if (loading) {
     return (
@@ -15,10 +21,14 @@ function AllIssuesList() {
     );
   }
 
+  // Filter issues based on selected category
+  const filteredIssues = selectedCategory === 'All' ? issues : issues.filter(issue => issue.category === selectedCategory);
+
   return (
     <Wrapper>
-      {issues.length > 0 ? (
-        issues.map((issue) => (
+      <Filter category={selectedCategory} onCategoryChange={handleCategoryChange} />
+      {filteredIssues.length > 0 ? (
+        filteredIssues.map((issue) => (
           <Issue key={issue.id}>
             <Box>
               <h2>{issue.title}</h2>
