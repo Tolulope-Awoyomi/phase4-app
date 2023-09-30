@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles/";
-import { UserContext } from "../components/context/user";
 import { IssuesContext } from "../components/context/issues";
 
 function AllIssuesList() {
-  const { user, setUser } = useContext(UserContext);
   const { issues, loading } = useContext(IssuesContext);
 
   if (loading) {

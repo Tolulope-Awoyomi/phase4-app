@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Error, FormField } from "../styles";
 
-function NewComment({ handleAddComment, userId, issueId, user, setUser, issues }) {
+function NewComment({ handleAddComment, userId, issueId, setUser }) {
   const [commentContent, setCommentContent] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -59,7 +59,7 @@ function NewComment({ handleAddComment, userId, issueId, user, setUser, issues }
             {errors?.map((err) => (
               <Error key={err}>{err}</Error>
             ))}
-          </FormField>
+      </FormField>
       <button type="submit">Submit</button>
     </form>
   );

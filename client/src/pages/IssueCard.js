@@ -6,7 +6,6 @@ import NewComment from "./NewComment";
 import { Button, Input, Label } from "../styles";
 import { UserContext } from "../components/context/user";
 import { IssuesContext } from "../components/context/issues";
-import MyIssuesList from "./MyIssuesList";
 
 function IssueCard() {
   const { id } = useParams();
@@ -180,8 +179,6 @@ function IssueCard() {
           </Box>
         ))}
       </Box>
-
-
     </Wrapper>
   );
 }

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Box, Button, Input, Label } from "../styles";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../components/context/user";
 import { IssuesContext } from "../components/context/issues";
 
 function MyCommentsList() {
-  const [newComment, setNewComment] = useState("")
-  const [issueBeingEdited, setIssueBeingEdited] = useState(null)
+  const [newComment, setNewComment] = useState("");
+  const [issueBeingEdited, setIssueBeingEdited] = useState(null);
   const { user } = useContext(UserContext);
   const { issues, setIssues } = useContext(IssuesContext);
  
@@ -17,11 +17,6 @@ function MyCommentsList() {
       setIssueBeingEdited(id)
     }
   }
-  useEffect(() => {
-    console.log("newComment:", newComment);
-    console.log("issueBeingEdited:", issueBeingEdited);
-  }, [newComment, issueBeingEdited]);
-  
 
   function handleDeleteComment (id) {
     fetch(`/comments/${id}`, {
@@ -86,6 +81,7 @@ function MyCommentsList() {
             return false
            }
         })
+
         const updatedComments = foundIssue.issues_with_comments.map((comment) => comment.comment_id === individualComment.comment_id ? individualComment : comment)
         foundIssue.issues_with_comments = updatedComments
         const newIssues = issues.map(issue => {
@@ -95,58 +91,50 @@ function MyCommentsList() {
             return issue
           }
         })
-        console.log("NEW ISSUES pre setIssues:", newIssues)
         setIssues(newIssues)
-        console.log("NEW ISSUES POST setIssues:", newIssues)
-
-
         setIssueBeingEdited(null)
-
       })
-      
       }
-      
      })
   }
 
   return (
     <Wrapper>
       {issues.map((issue) => issue.issues_with_comments.map((comment) => {
-    if (comment.username === user.username) {
-      return (
-        <Issue key={issue.id}>
-        <Box>
-          <h1>{issue.title}</h1>
-          <p>
-            <em><b>Description:</b> {issue.description}</em>
-            &nbsp;·&nbsp;
-            <cite><b>Category:</b> {issue.category}</cite><br></br><br></br>
-            &nbsp;·&nbsp;
-          </p>
-          <p><em><b>My comment:</b></em> {comment.content}</p>
-          <button onClick={() => handleDeleteComment(comment.comment_id)}>Delete</button>
-          <button onClick={() => toggleComment(comment.id)}>Edit</button>
-          {issueBeingEdited === issue.id ? 
-                            <form>
-                            <Label htmlFor="title">Comment</Label>
-                            <Input
-                              type="text"
-                              id="comment"
-                              value={newComment}
-                              onChange={(e) => setNewComment(e.target.value)}
-                            />
-                                <Button onClick={(e) => handleUpdateComment(e, comment.comment_id)} color="primary" type="submit">
-                                 Submit Comment
-                                </Button>
-                            </form>
-                              : null
-                        }  
-        </Box>
-        </Issue>
-      )
-    }
-  }))}
-  
+        if (comment.username === user.username) {
+          return (
+            <Issue key={issue.id}>
+              <Box>
+                <h1>{issue.title}</h1>
+                <p>
+                  <em><b>Description:</b> {issue.description}</em>
+                  &nbsp;·&nbsp;
+                  <cite><b>Category:</b> {issue.category}</cite><br></br><br></br>
+                  &nbsp;·&nbsp;
+                </p>
+                <p><em><b>My comment:</b></em> {comment.content}</p>
+                <button onClick={() => handleDeleteComment(comment.comment_id)}>Delete</button>
+                <button onClick={() => toggleComment(comment.id)}>Edit</button>
+                {issueBeingEdited === issue.id ? 
+                  <form>
+                    <Label htmlFor="title">Comment</Label>
+                    <Input
+                      type="text"
+                      id="comment"
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                    />
+                    <Button onClick={(e) => handleUpdateComment(e, comment.comment_id)} color="primary" type="submit">
+                      Submit Comment
+                    </Button>
+                  </form>
+                : null
+                }  
+              </Box>
+            </Issue>
+          )
+        }
+      }))}
     </Wrapper>
   );
 }
