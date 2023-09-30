@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 require 'faker'
 
 puts "📚 Seeding student debt issues..."
@@ -64,11 +56,10 @@ issues_data = [
   }
 ]
 
-# Create student debt issues with realistic usernames, emails, and comments
 issues_data.each do |issue_data|
-  username = Faker::Internet.unique.user_name
+  username = Faker::Internet.unique.user_name.capitalize
   email = Faker::Internet.unique.safe_email
-  password = Faker::Alphanumeric.alphanumeric(number: 6) # Generates a random alphanumeric password
+  password = Faker::Alphanumeric.alphanumeric(number: 6) 
 
   user = User.create(
     username: username,

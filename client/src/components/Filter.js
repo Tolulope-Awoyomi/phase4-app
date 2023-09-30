@@ -4,12 +4,12 @@ function Filter({ category, onCategoryChange }) {
 
   return (
     <div className='Filter'>
+      <label htmlFor="filter">Filter by Category:</label>
         <select
             name="filter"
             value={category}
             onChange={(e) => onCategoryChange(e.target.value)}
         >
-          <label>Filter by Category</label>
             <option value="All">All</option>
             <option value="Interest Rates">Interest Rates</option>
             <option value="Loan Forgiveness">Loan Forgiveness</option>

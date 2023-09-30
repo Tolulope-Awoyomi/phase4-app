@@ -73,13 +73,24 @@ function NewIssue({ handleAddIssue }) {
           </FormField>
           <FormField>
             <Label htmlFor="category">Category</Label>
-            <Input
-              type="text"
+            <select
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            />
+            >
+              <option value="Interest Rates">Interest Rates</option>
+              <option value="Loan Forgiveness">Loan Forgiveness</option>
+              <option value="Deferment">Deferment</option>
+              <option value="Repayment Plans">Repayment Plans</option>
+              <option value="Loan Types">Loan Types</option>
+              <option value="Defaults">Defaults</option>
+              <option value="Scams">Scams</option>
+              <option value="Counselling">Counselling</option>
+              <option value="Cost Reduction">Cost Reduction</option>
+              <option value="Huge Student Debt">Huge Student Debt</option>
+            </select>
           </FormField>
+
           <FormField>
             <Button color="primary" type="submit">
               {isLoading ? "Loading..." : "Submit Issue"}
