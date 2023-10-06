@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const IssuesContext = React.createContext();
 
 function IssuesProvider({ children }) {
-    const [issues, setIssues] = useState({});
+    const [issues, setIssues] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

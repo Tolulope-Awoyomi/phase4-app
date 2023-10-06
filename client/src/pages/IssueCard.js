@@ -15,7 +15,7 @@ function IssueCard() {
   const { user, setUser } = useContext(UserContext); 
   const { issues, setIssues } = useContext(IssuesContext);
 
-  const foundIssue = Array.isArray(issues) ? issues.find((issue) => issue.id === parseInt(id)) : null;
+  const foundIssue = issues.find((issue) => issue.id === parseInt(id));
 
   useEffect(() => {
     if (foundIssue) {
@@ -24,18 +24,6 @@ function IssueCard() {
       setStatus("rejected");
     }
   }, [id, issues, foundIssue]);
-
-
-  function handleAddComment(updatedComments) {
-    const updatedIssue = { ...foundIssue };
-    updatedIssue.issues_with_comments = updatedComments;
-  
-    const newIssues = issues.map((issue) =>
-      issue.id === updatedIssue.id ? updatedIssue : issue
-    );
-  
-    setIssues(newIssues);
-  }
   
 
   function handleDelete(id) {
@@ -45,7 +33,7 @@ function IssueCard() {
       if (r.ok) {
         const filteredComments = foundIssue.issues_with_comments.filter(
           (comment) => {
-            return comment.comment_id !== id;
+            return comment.id !== id;
           }
         );
         foundIssue.issues_with_comments = filteredComments;
@@ -68,7 +56,7 @@ function IssueCard() {
   function handleEditComment(commentId) {
     setEditCommentId(commentId);
     const editedComment = foundIssue.issues_with_comments.find(
-      (comment) => comment.comment_id === commentId
+      (comment) => comment.id === commentId
     );
     setNewComment(editedComment.content);
   }
@@ -98,7 +86,7 @@ function IssueCard() {
           username: data.user.username,
         };
         const updatedComments = foundIssue.issues_with_comments.map((comment) =>
-          comment.comment_id === updatedCommentWithUsername.comment_id
+          comment.id === updatedCommentWithUsername.id
             ? updatedCommentWithUsername
             : comment
         );
@@ -131,19 +119,17 @@ function IssueCard() {
       <Box>
         {hasUserCommented(foundIssue) ? null : (
           <NewComment
-            handleAddComment={handleAddComment}
             issueId={foundIssue.id}
             userId={user.id}
             user={user}
             setUser={setUser}
-            issues={issues}
           />
         )}
 
         {foundIssue.issues_with_comments?.map((comment) => (
-          <Box key={comment.comment_id}>
-            {editCommentId === comment.comment_id ? (
-              <form onSubmit={(e) => handleUpdateComment(e, comment.comment_id)}>
+          <Box key={comment.id}>
+            {editCommentId === comment.id ? (
+              <form onSubmit={(e) => handleUpdateComment(e, comment.id)}>
                 <Label htmlFor="comment">Edit Comment</Label>
                 <Input
                   type="text"
@@ -163,10 +149,10 @@ function IssueCard() {
                 <br></br>
                 {comment.username === user.username ? (
                   <>
-                    <Button onClick={() => handleDelete(comment.comment_id)}>
+                    <Button onClick={() => handleDelete(comment.id)}>
                       Delete
                     </Button>
-                    <Button onClick={() => handleEditComment(comment.comment_id)}>
+                    <Button onClick={() => handleEditComment(comment.id)}>
                       Edit
                     </Button>
                   </>

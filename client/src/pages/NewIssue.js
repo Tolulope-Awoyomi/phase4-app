@@ -41,7 +41,6 @@ function NewIssue() {
             handleAddIssue(issueFromForm);
             navigate("/issues");
           });
-
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
