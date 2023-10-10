@@ -7,10 +7,15 @@ import Filter from "../components/Filter";
 
 function AllIssuesList() {
   const { issues, loading } = useContext(IssuesContext);
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
   function handleCategoryChange(category) {
     setSelectedCategory(category);
+  }
+
+  function handleSearch(e) {
+    setSearchQuery(e.target.value);
   }
 
   if (loading) {
@@ -21,11 +26,23 @@ function AllIssuesList() {
     );
   }
 
-  const filteredIssues = selectedCategory === 'All' ? issues : issues.filter(issue => issue.category === selectedCategory);
+  const filteredByCategory = selectedCategory === "All" ? issues : issues.filter((issue) => issue.category === selectedCategory);
+
+  const filteredIssues = searchQuery
+    ? filteredByCategory.filter((issue) =>
+        issue.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : filteredByCategory;
 
   return (
     <Wrapper>
       <Filter category={selectedCategory} onCategoryChange={handleCategoryChange} />
+      <SearchInput
+        type="text"
+        placeholder="Search by title..."
+        value={searchQuery}
+        onChange={handleSearch}
+      />
       {filteredIssues.length > 0 ? (
         filteredIssues.map((issue) => (
           <Issue key={issue.id}>
@@ -53,6 +70,12 @@ function AllIssuesList() {
     </Wrapper>
   );
 }
+
+const SearchInput = styled.input`
+  width: 90%;
+  margin-bottom: 16px;
+  padding: 6px;
+`;
 
 const Wrapper = styled.section`
   max-width: 800px;
