@@ -9,6 +9,6 @@ class IssueSerializer < ActiveModel::Serializer
       issue_id: comment.issue_id,
       user_id: comment.user.id
       }
-  }
-end
+    }
+  end
 end
