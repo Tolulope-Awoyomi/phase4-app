@@ -24,28 +24,28 @@ class IssuesController < ApplicationController
     end
   end
 
-  def update
-    issue = Issue.find_by(id: params[:id])
-    if issue
-      if issue.update(issue_params)
-        render json: issue, status: :accepted
-      else
-        render json: { errors: issue.errors.full_messages }, status: :unprocessable_entity
-      end
-    else
-      render json: { error: 'Issue not found' }, status: :not_found
-    end
-  end
+  # def update
+  #   issue = Issue.find_by(id: params[:id])
+  #   if issue
+  #     if issue.update(issue_params)
+  #       render json: issue, status: :accepted
+  #     else
+  #       render json: { errors: issue.errors.full_messages }, status: :unprocessable_entity
+  #     end
+  #   else
+  #     render json: { error: 'Issue not found' }, status: :not_found
+  #   end
+  # end
 
-  def destroy
-    issue = Issue.find_by(id: params[:id])
-    if issue
-      issue.destroy
-      head :no_content
-    else
-      render json: { error: 'Issue not found' }, status: :not_found
-    end
-  end
+  # def destroy
+  #   issue = Issue.find_by(id: params[:id])
+  #   if issue
+  #     issue.destroy
+  #     head :no_content
+  #   else
+  #     render json: { error: 'Issue not found' }, status: :not_found
+  #   end
+  # end
 
   private
 

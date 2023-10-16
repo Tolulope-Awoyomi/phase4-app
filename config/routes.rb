@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  # get "comments/:word", to: "comments#word"
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   post '/signup', to: 'users#create'
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :users, only: [:create, :show]
-  resources :issues
+  resources :issues, except: [:update, :destroy]
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

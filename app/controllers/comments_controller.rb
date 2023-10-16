@@ -41,19 +41,7 @@ class CommentsController < ApplicationController
             render json: { error: 'Comment not found' }, status: :not_found
         end
     end
-
-
-    def word
-        input_word = params[:word].downcase
-        found_word = Comment.where("lower(content) LIKE ?", "%#{input_word}%") 
-        # found_word = Comment.all.fiter()
-        if found_word.any?
-            users = found_word.map{ |comment| comment.user }
-            render json:  users, status: :ok
-        else
-            render json: { errors: [ "could not find #{input_word}" ]}
-        end
-    end
+    
 
     private
     def comment_params
@@ -66,4 +54,3 @@ class CommentsController < ApplicationController
 
 end
 
-# Make a custom route that takes a parameter of a word. The user will make a request with a specific word and your API should return an array of user objects who used that word in the content of any of their comments. If no comments have that word in their content return a JSON message that says so. Your search of content attributes should be fuzzy - in other words, case-insensitive and partial hits should still count. For instance, if the user submits “sun” and the word “Sunday” is in the content of the comment that counts as a match.
