@@ -29,7 +29,8 @@ function IssueCard() {
   function handleDelete(id) {
     fetch(`/comments/${id}`, {
       method: "DELETE",
-    }).then((r) => {
+    })
+    .then((r) => {
       if (r.ok) {
         const filteredComments = foundIssue.issues_with_comments.filter(
           (comment) => {

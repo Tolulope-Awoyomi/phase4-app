@@ -11,7 +11,7 @@ function NewComment({ issueId, setUser, user, userId }) {
     return () => {
       // Cleanup function
     };
-  }, []); // Empty dependency array, runs once when the component mounts
+  }, []); 
 
   function handleSubmit(e) {
     e.preventDefault();

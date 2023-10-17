@@ -28,11 +28,7 @@ function AllIssuesList() {
 
   const filteredByCategory = selectedCategory === "All" ? issues : issues.filter((issue) => issue.category === selectedCategory);
 
-  const filteredIssues = searchQuery
-    ? filteredByCategory.filter((issue) =>
-        issue.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : filteredByCategory;
+  const filteredIssues = searchQuery ? filteredByCategory.filter((issue) => issue.title.toLowerCase().includes(searchQuery.toLowerCase())) : filteredByCategory;
 
   return (
     <Wrapper>
