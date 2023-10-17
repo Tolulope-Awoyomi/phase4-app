@@ -6,8 +6,8 @@ class User < ApplicationRecord
     
     validates :username, :email, :password, :password_confirmation, presence: true
     validates :username, uniqueness: true
-    validate :password_complexity
     validates :password, confirmation: true
+    validate :password_complexity
     
     
     def password_complexity
