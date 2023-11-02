@@ -65,6 +65,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.before_configuration do
-    ENV['OPENAI_API_KEY'] = 'took_this_out_for_security_reasons'
+    ENV['OPENAI_API_KEY'] = 'took_out_my_api_key_for_security_reasons'
   end
 end

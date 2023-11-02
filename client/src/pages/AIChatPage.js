@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Button } from "../styles/";
+import { Button, Error, FormField } from "../styles/";
 
 const ChatPage = () => {
   const [conversation, setConversation] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [generatedResponse, setGeneratedResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false); 
+  const [errors, setErrors] = useState([]);
 
   const getCurrentTime = () => {
     const now = new Date();
@@ -14,7 +14,8 @@ const ChatPage = () => {
   };
 
   const handleGenerateResponse = () => {
-    if (!searchQuery) {
+    if (!searchQuery.trim()) { 
+      setErrors(["Message can't be blank"]);
       return;
     }
     
@@ -33,6 +34,7 @@ const ChatPage = () => {
         setIsLoading(false); 
         if (r.ok) {
           r.json().then((response) => {
+            setErrors([])
             const userMessage = {
               role: "user",
               timestamp: getCurrentTime(),
@@ -50,7 +52,7 @@ const ChatPage = () => {
             setSearchQuery("");
           });
         } else {
-          r.json().then((err) => console.log(err.errors));
+          r.json().then((err) =>setErrors(err.errors));
         }
       });
   };
@@ -78,6 +80,12 @@ const ChatPage = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <Button onClick={handleGenerateResponse}>Send</Button>
+
+      <FormField>
+            {errors?.map((err) => (
+              <Error key={err}>{err}</Error>
+            ))}
+          </FormField>
     </Wrapper>
   );
 };
