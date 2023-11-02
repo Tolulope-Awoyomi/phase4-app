@@ -32,6 +32,9 @@ function NavBar() {
             <NavLink to="/new-issue">
                 <Button>ADD NEW ISSUE</Button>
             </NavLink> 
+            <NavLink to="/chat">
+                <Button>Chat with StudebtGPT</Button>
+            </NavLink> 
             <Button onClick={logoutUser}>Login/Logout</Button> 
             </nav>
           </div>

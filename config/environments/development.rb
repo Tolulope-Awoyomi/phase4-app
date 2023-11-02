@@ -63,4 +63,8 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.before_configuration do
+    ENV['OPENAI_API_KEY'] = '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'
+  end
 end

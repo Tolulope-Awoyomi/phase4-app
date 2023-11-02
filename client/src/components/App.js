@@ -11,6 +11,7 @@ import NewIssue from "../pages/NewIssue";
 import MyIssuesList from "../pages/MyIssuesList";
 import LoginOrSignup from "./LoginOrSignup";
 import Header from "./Header";
+import ChatPage from "../pages/AIChatPage";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -34,6 +35,7 @@ function App() {
             <Route path="/issues/:id" element={<IssueCard />} />
             <Route path="/new-issue" element={<NewIssue />} />
             <Route path="/my-issues" element={<MyIssuesList />} />
+            <Route path="/chat" element={<ChatPage />} />
           </Routes>
     </div>
   );
