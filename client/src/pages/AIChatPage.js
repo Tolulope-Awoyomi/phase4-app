@@ -6,34 +6,48 @@ const ChatPage = () => {
   const [conversation, setConversation] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [generatedResponse, setGeneratedResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false); 
 
-  // Define a function to get the current time
   const getCurrentTime = () => {
     const now = new Date();
     return now.toLocaleTimeString();
   };
 
   const handleGenerateResponse = () => {
+    if (!searchQuery) {
+      return;
+    }
+    
+    setIsLoading(true); 
+
     fetch(`/chat/generate_response`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "prompt": `Generate a response to a student's debt issue`
+        "prompt": searchQuery 
       })
     })
       .then((r) => {
+        setIsLoading(false); 
         if (r.ok) {
           r.json().then((response) => {
-            // Create a new message object
-            const newMessage = {
-              role: "bot", // Assuming the response is from the bot
+            const userMessage = {
+              role: "user",
               timestamp: getCurrentTime(),
-              content: response.response,
+              content: searchQuery,
             };
-            // Add the new message to the conversation
-            setConversation([...conversation, newMessage]);
+  
+            const botResponse = {
+              role: "bot",
+              timestamp: getCurrentTime(),
+              content: response.response.content,
+            };
+  
+            setConversation([...conversation, userMessage, botResponse]);
+  
+            setSearchQuery("");
           });
         } else {
           r.json().then((err) => console.log(err.errors));
@@ -43,21 +57,27 @@ const ChatPage = () => {
 
   return (
     <Wrapper>
+       <Header>ASK StudebtGPT your questions!</Header>  
+      {isLoading && <div>Loading...</div>} 
       {conversation.map((message, index) => (
         <ChatMessage key={index} role={message.role}>
           <div>
             <small>{message.timestamp}</small>
           </div>
-          {message.content}
+          {typeof message.content === 'string' ? (
+            message.content
+          ) : (
+            JSON.stringify(message.content) 
+          )}
         </ChatMessage>
       ))}
-      <Button onClick={handleGenerateResponse}>Chat with StudebtGPT</Button>
-      {generatedResponse && (
-        <div>
-          <h3>Generated Response:</h3>
-          <p>{generatedResponse}</p>
-        </div>
-      )}
+      <Input
+        type="text"
+        placeholder="Type your query..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <Button onClick={handleGenerateResponse}>Send</Button>
     </Wrapper>
   );
 };
@@ -67,12 +87,27 @@ const ChatMessage = styled.div`
     props.role === "user" ? "lightblue" : "lightgray"};
   padding: 8px;
   margin: 8px;
+  color: ${(props) =>
+    props.role === "user" ? "black" : "black"};
+`;
+
+
+const Input = styled.input`
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
 `;
 
 const Wrapper = styled.section`
   max-width: 800px;
   margin: 40px auto;
   text-align: center;
+`;
+
+const Header = styled.h2`
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
 `;
 
 export default ChatPage;
