@@ -7,6 +7,12 @@ const ChatPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [generatedResponse, setGeneratedResponse] = useState("");
 
+  // Define a function to get the current time
+  const getCurrentTime = () => {
+    const now = new Date();
+    return now.toLocaleTimeString();
+  };
+
   const handleGenerateResponse = () => {
     fetch(`/chat/generate_response`, {
       method: "POST",
@@ -23,7 +29,7 @@ const ChatPage = () => {
             // Create a new message object
             const newMessage = {
               role: "bot", // Assuming the response is from the bot
-              timestamp: getCurrentTime(), // You need to implement getCurrentTime()
+              timestamp: getCurrentTime(),
               content: response.response,
             };
             // Add the new message to the conversation
@@ -33,12 +39,6 @@ const ChatPage = () => {
           r.json().then((err) => console.log(err.errors));
         }
       });
-  };
-
-  // Define a function to get the current time
-  const getCurrentTime = () => {
-    const now = new Date();
-    return now.toLocaleTimeString();
   };
 
   return (
